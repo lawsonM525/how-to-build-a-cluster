@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-black text-white font-sans antialiased;
+}
+
+code {
+  @apply font-mono text-white/90 bg-white/10 px-1 py-0.5 rounded text-sm;
+}
+
+pre {
+  @apply bg-black border border-white/20 p-4 rounded-lg overflow-x-auto;
+}
+
+pre code {
+  @apply bg-transparent p-0 text-white;
+}
+
+a {
+  @apply text-white underline decoration-white/30 decoration-2 underline-offset-4 hover:decoration-white transition-all;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-bold tracking-tight text-white;
+}
+
+h1 {
+  @apply text-4xl mb-8;
+}
+
+h2 {
+  @apply text-2xl mb-6 mt-12 border-b border-white/20 pb-2;
+}
+
+h3 {
+  @apply text-xl mb-4 mt-8;
+}
+
+p {
+  @apply leading-7 mb-4 text-white/80;
+}
+
+ul {
+  @apply list-disc list-outside mb-4 ml-4 text-white/80;
+}
+
+li {
+  @apply mb-1;
+}
+
+blockquote {
+  @apply border-l-2 border-white/40 pl-4 italic text-white/60 my-6;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-black;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-white/20 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-white/40;
+}
