@@ -21,12 +21,12 @@ const Note = ({ type = 'info', title, children }: NoteProps) => {
   const Icon = icons[type];
 
   return (
-    <div className="my-6 p-4 border border-white/20 bg-white/5 rounded">
+    <div className="my-6 p-4 border border-border bg-bg-secondary/30 rounded transition-colors duration-200">
       <div className="flex items-start gap-4">
-        <Icon className="mt-1 shrink-0 text-white" size={20} strokeWidth={1.5} />
+        <Icon className="mt-1 shrink-0 text-primary" size={20} strokeWidth={1.5} />
         <div className="flex-1">
-          {title && <h4 className="font-bold mb-2 text-white text-sm uppercase tracking-wide">{title}</h4>}
-          <div className="text-white/80 leading-relaxed text-sm">
+          {title && <h4 className="font-bold mb-2 text-primary text-sm uppercase tracking-wide">{title}</h4>}
+          <div className="text-primary/80 leading-relaxed text-sm">
             {children}
           </div>
         </div>

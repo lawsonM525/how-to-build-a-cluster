@@ -1,4 +1,4 @@
-import { Server, Network, Cpu, Layers, Terminal, BookOpen, Home } from 'lucide-react';
+import { Server, Cpu, Layers, Terminal, BookOpen, Home, Shield, Database } from 'lucide-react';
 
 export const navigation = [
   {
@@ -8,59 +8,72 @@ export const navigation = [
     chapters: []
   },
   {
-    title: "Hardware",
+    title: "Conceptual Foundations",
+    path: "/foundations",
+    icon: BookOpen,
+    chapters: [
+      { title: "Ch 1: World of Cluster Computing", path: "/foundations/cluster-computing" }
+    ]
+  },
+  {
+    title: "Hardware Engineering",
     path: "/hardware",
     icon: Server,
     chapters: [
-      { title: "Choosing Components", path: "/hardware/components" },
-      { title: "Assembly Guide", path: "/hardware/assembly" },
-      { title: "Power Management", path: "/hardware/power" }
+      { title: "Ch 2: Designing the Iron", path: "/hardware/design" }
     ]
   },
   {
-    title: "Networking",
-    path: "/network",
-    icon: Network,
-    chapters: [
-      { title: "Topology", path: "/network/topology" },
-      { title: "Switch Configuration", path: "/network/switch" },
-      { title: "DNS & DHCP", path: "/network/dns-dhcp" }
-    ]
-  },
-  {
-    title: "Operating System",
-    path: "/os",
+    title: "Software Foundation",
+    path: "/software",
     icon: Terminal,
     chapters: [
-      { title: "OS Selection", path: "/os/selection" },
-      { title: "Automated Install (PXE)", path: "/os/pxe" },
-      { title: "Post-Install Config", path: "/os/config" }
+      { title: "Ch 3: OS Selection", path: "/software/os" },
+      { title: "Ch 4: Network Configuration", path: "/software/network" }
     ]
   },
   {
-    title: "Cluster Management",
-    path: "/management",
+    title: "Infrastructure Services",
+    path: "/infrastructure",
+    icon: Database,
+    chapters: [
+      { title: "Ch 5: Shared Storage", path: "/infrastructure/storage" },
+      { title: "Ch 6: User Management", path: "/infrastructure/users" },
+      { title: "Ch 7: Cluster Management", path: "/infrastructure/management" }
+    ]
+  },
+  {
+    title: "Workload Manager",
+    path: "/workload",
     icon: Layers,
     chapters: [
-      { title: "Ansible Setup", path: "/management/ansible" },
-      { title: "Monitoring", path: "/management/monitoring" },
-      { title: "Logging", path: "/management/logging" }
+      { title: "Ch 8: Job Schedulers", path: "/workload/schedulers" }
     ]
   },
   {
-    title: "Applications",
-    path: "/applications",
+    title: "Parallel Programming",
+    path: "/parallel",
     icon: Cpu,
     chapters: [
-      { title: "Kubernetes (K3s)", path: "/applications/k3s" },
-      { title: "Storage (Ceph/NFS)", path: "/applications/storage" },
-      { title: "Load Balancing", path: "/applications/load-balancing" }
+      { title: "Ch 9: Frameworks", path: "/parallel/frameworks" },
+      { title: "Ch 10: Optimization", path: "/parallel/optimization" }
+    ]
+  },
+  {
+    title: "Validation & Security",
+    path: "/validation",
+    icon: Shield,
+    chapters: [
+      { title: "Ch 11: Benchmarking", path: "/validation/benchmarking" },
+      { title: "Ch 12: Security & Hardening", path: "/validation/security" }
     ]
   },
   {
     title: "Resources",
     path: "/resources",
     icon: BookOpen,
-    chapters: []
+    chapters: [
+      { title: "Sources & References", path: "/resources/sources" }
+    ]
   }
 ];

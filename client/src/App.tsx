@@ -1,8 +1,15 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import Home from './pages/Home';
+import ClusterComputing from './pages/foundations/ClusterComputing';
 import HardwareComponents from './pages/hardware/Components';
+import OSSelection from './pages/software/OSSelection';
+import NetworkConfiguration from './pages/software/NetworkConfiguration';
+import UserManagement from './pages/infrastructure/UserManagement';
 import AnsibleSetup from './pages/management/AnsibleSetup';
+import ParallelFrameworks from './pages/parallel/Frameworks';
+import SecurityHardening from './pages/validation/SecurityHardening';
+import Sources from './pages/resources/Sources';
 import Placeholder from './components/Placeholder';
 import NotFound from './pages/NotFound';
 
@@ -13,48 +20,58 @@ function App() {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
           
-          {/* Hardware Section */}
+          {/* Part I: Conceptual Foundations */}
+          <Route path="foundations">
+            <Route index element={<Navigate to="cluster-computing" replace />} />
+            <Route path="cluster-computing" element={<ClusterComputing />} />
+          </Route>
+
+          {/* Part II: Hardware Engineering */}
           <Route path="hardware">
-            <Route index element={<Navigate to="/hardware/components" replace />} />
-            <Route path="components" element={<HardwareComponents />} />
-            <Route path="assembly" element={<Placeholder title="Assembly Guide" />} />
-            <Route path="power" element={<Placeholder title="Power Management" />} />
+            <Route index element={<Navigate to="design" replace />} />
+            <Route path="design" element={<HardwareComponents />} />
           </Route>
 
-          {/* Network Section */}
-          <Route path="network">
-            <Route index element={<Navigate to="/network/topology" replace />} />
-            <Route path="topology" element={<Placeholder title="Network Topology" />} />
-            <Route path="switch" element={<Placeholder title="Switch Configuration" />} />
-            <Route path="dns-dhcp" element={<Placeholder title="DNS & DHCP" />} />
+          {/* Part III: Software Foundation */}
+          <Route path="software">
+            <Route index element={<Navigate to="os" replace />} />
+            <Route path="os" element={<OSSelection />} />
+            <Route path="network" element={<NetworkConfiguration />} />
           </Route>
 
-          {/* OS Section */}
-          <Route path="os">
-            <Route index element={<Navigate to="/os/selection" replace />} />
-            <Route path="selection" element={<Placeholder title="OS Selection" />} />
-            <Route path="pxe" element={<Placeholder title="Automated Install (PXE)" />} />
-            <Route path="config" element={<Placeholder title="Post-Install Config" />} />
+          {/* Part IV: Infrastructure Services */}
+          <Route path="infrastructure">
+            <Route index element={<Navigate to="storage" replace />} />
+            <Route path="storage" element={<Placeholder title="Shared Storage & Filesystems" />} />
+            <Route path="users" element={<UserManagement />} />
+            <Route path="management" element={<AnsibleSetup />} />
           </Route>
 
-          {/* Management Section */}
-          <Route path="management">
-            <Route index element={<Navigate to="/management/ansible" replace />} />
-            <Route path="ansible" element={<AnsibleSetup />} />
-            <Route path="monitoring" element={<Placeholder title="Monitoring" />} />
-            <Route path="logging" element={<Placeholder title="Logging" />} />
+          {/* Part V: Workload Manager */}
+          <Route path="workload">
+            <Route index element={<Navigate to="schedulers" replace />} />
+            <Route path="schedulers" element={<Placeholder title="Job Schedulers" />} />
           </Route>
 
-          {/* Applications Section */}
-          <Route path="applications">
-            <Route index element={<Navigate to="/applications/k3s" replace />} />
-            <Route path="k3s" element={<Placeholder title="Kubernetes (K3s)" />} />
-            <Route path="storage" element={<Placeholder title="Storage (Ceph/NFS)" />} />
-            <Route path="load-balancing" element={<Placeholder title="Load Balancing" />} />
+          {/* Part VI: Parallel Programming */}
+          <Route path="parallel">
+            <Route index element={<Navigate to="frameworks" replace />} />
+            <Route path="frameworks" element={<ParallelFrameworks />} />
+            <Route path="optimization" element={<Placeholder title="Optimization & Libraries" />} />
           </Route>
 
-          {/* Resources Section */}
-          <Route path="resources" element={<Placeholder title="Resources" />} />
+          {/* Part VII: Validation & Security */}
+          <Route path="validation">
+            <Route index element={<Navigate to="benchmarking" replace />} />
+            <Route path="benchmarking" element={<Placeholder title="Benchmarking" />} />
+            <Route path="security" element={<SecurityHardening />} />
+          </Route>
+
+          {/* Resources */}
+          <Route path="resources">
+            <Route index element={<Navigate to="sources" replace />} />
+            <Route path="sources" element={<Sources />} />
+          </Route>
 
           {/* Fallback */}
           <Route path="*" element={<NotFound />} />

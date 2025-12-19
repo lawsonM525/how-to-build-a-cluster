@@ -1,86 +1,95 @@
-import { ArrowRight, Server, Zap, Globe } from 'lucide-react';
+import { ArrowRight, BookOpen, Server, Terminal, Database, Layers, Cpu, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import Terminal from '../components/Terminal';
-import Note from '../components/Note';
 
 const Home = () => {
+  const sections = [
+    {
+      title: "Part I: Conceptual Foundations",
+      icon: BookOpen,
+      desc: "Define the cluster. Understand HPC vs HA. Learn the history from Beowulf to Top500.",
+      chapters: ["The World of Cluster Computing"]
+    },
+    {
+      title: "Part II: Hardware Engineering",
+      icon: Server,
+      desc: "Design the iron. Select CPUs and memory. Build the nervous system with high-speed interconnects.",
+      chapters: ["Designing the Iron"]
+    },
+    {
+      title: "Part III: The Software Foundation",
+      icon: Terminal,
+      desc: "Select the OS. Automate installation. Configure the network for seamless access.",
+      chapters: ["Operating System Selection", "Network Configuration"]
+    },
+    {
+      title: "Part IV: Infrastructure Services",
+      icon: Database,
+      desc: "Mount shared storage. Manage users centrally. Automate drift with Ansible.",
+      chapters: ["Shared Storage & Filesystems", "User Management", "Cluster Management"]
+    },
+    {
+      title: "Part V: The Workload Manager",
+      icon: Layers,
+      desc: "Arbitrate resources. Queue jobs. Master Slurm commands and submission scripts.",
+      chapters: ["Job Schedulers"]
+    },
+    {
+      title: "Part VI: Parallel Programming",
+      icon: Cpu,
+      desc: "Code for distributed systems. Use MPI and CUDA. Optimize with math libraries.",
+      chapters: ["Parallel Frameworks", "Optimization & Libraries"]
+    },
+    {
+      title: "Part VII: Validation & Security",
+      icon: Shield,
+      desc: "Benchmark performance. Harden the cluster. Audit security and track vulnerabilities.",
+      chapters: ["Benchmarking", "Security & Hardening"]
+    }
+  ];
+
   return (
-    <div className="space-y-8 max-w-4xl">
-      <div className="space-y-4">
-        <h1 className="text-5xl font-extrabold text-white mb-4 tracking-tight">
-          Building Your Own Cluster
+    <div className="space-y-12 max-w-5xl">
+      <div className="space-y-6 text-center md:text-left">
+        <h1 className="text-5xl font-extrabold text-primary tracking-tight">
+          Build Your Own Cluster
         </h1>
-        <p className="text-xl text-white/80 leading-relaxed">
-          A comprehensive, interactive guide to building a high-availability compute cluster 
-          from scratch. From selecting hardware to deploying Kubernetes.
+        <p className="text-xl text-primary/80 leading-relaxed max-w-3xl">
+          A comprehensive guide to building high-performance compute clusters. 
+          From commodity hardware to distributed parallel programming. 
+          No fluff. Just engineering.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-12">
-        <div className="p-6 rounded border border-white/20 bg-black hover:border-white transition-colors group">
-          <Server className="text-white mb-4 group-hover:scale-110 transition-transform" size={32} strokeWidth={1.5} />
-          <h3 className="text-lg font-bold text-white mb-2 mt-0">Hardware</h3>
-          <p className="text-white/60 text-sm mb-0">Component selection, assembly, and power management for your nodes.</p>
-        </div>
-        <div className="p-6 rounded border border-white/20 bg-black hover:border-white transition-colors group">
-          <Globe className="text-white mb-4 group-hover:scale-110 transition-transform" size={32} strokeWidth={1.5} />
-          <h3 className="text-lg font-bold text-white mb-2 mt-0">Networking</h3>
-          <p className="text-white/60 text-sm mb-0">VLANs, subnets, DNS, DHCP, and load balancing configurations.</p>
-        </div>
-        <div className="p-6 rounded border border-white/20 bg-black hover:border-white transition-colors group">
-          <Zap className="text-white mb-4 group-hover:scale-110 transition-transform" size={32} strokeWidth={1.5} />
-          <h3 className="text-lg font-bold text-white mb-2 mt-0">Software</h3>
-          <p className="text-white/60 text-sm mb-0">Automated OS provisioning, Kubernetes setup, and monitoring.</p>
-        </div>
-      </div>
-
-      <section className="space-y-6">
-        <h2>Why build a cluster?</h2>
-        <p>
-          Building a home lab or small business cluster is the best way to learn distributed systems, 
-          cloud-native technologies, and DevOps practices. This guide covers everything you need to know, 
-          opinionated but flexible.
-        </p>
-        
-        <Note type="info" title="Prerequisites">
-          You should be comfortable with the Linux command line and basic networking concepts. 
-          We'll handle the advanced stuff together.
-        </Note>
-
-        <h3>Quick Start</h3>
-        <p>
-          If you have your hardware ready, we can start by bootstrapping the management node.
-        </p>
-
-        <Terminal title="management-node:~">
-          <div className="space-y-1">
-            <div className="flex gap-2">
-              <span className="text-green-500">user@manage:~$</span>
-              <span className="text-white">git clone https://github.com/the-robots/cluster-bootstrap.git</span>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {sections.map((section, idx) => (
+          <div key={idx} className="p-6 rounded border border-border bg-bg-primary hover:border-primary transition-colors group flex flex-col h-full">
+            <div className="flex items-center gap-3 mb-4">
+              <section.icon className="text-primary group-hover:scale-110 transition-transform" size={28} strokeWidth={1.5} />
+              <h3 className="text-lg font-bold text-primary m-0">{section.title}</h3>
             </div>
-            <div className="flex gap-2">
-              <span className="text-green-500">user@manage:~$</span>
-              <span className="text-white">cd cluster-bootstrap</span>
-            </div>
-            <div className="flex gap-2">
-              <span className="text-green-500">user@manage:~/cluster-bootstrap$</span>
-              <span className="text-white">./init.sh --dry-run</span>
-            </div>
-            <div className="text-white/60 mt-2">
-              [INFO] Checking prerequisites...<br/>
-              [INFO] Validating network configuration...<br/>
-              [SUCCESS] Ready to bootstrap!
+            
+            <p className="text-primary/70 text-sm mb-6 flex-grow">
+              {section.desc}
+            </p>
+
+            <div className="space-y-2">
+              {section.chapters.map((chapter, cIdx) => (
+                <div key={cIdx} className="flex items-center gap-2 text-sm text-primary/90 font-medium">
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary/40" />
+                  {chapter}
+                </div>
+              ))}
             </div>
           </div>
-        </Terminal>
-      </section>
+        ))}
+      </div>
 
-      <div className="flex justify-end mt-12">
+      <div className="flex justify-end pt-8">
         <Link 
-          to="/hardware" 
-          className="inline-flex items-center gap-2 px-6 py-3 border border-white/40 text-white font-bold rounded hover:bg-white hover:text-black transition-all"
+          to="/foundations/cluster-computing" 
+          className="inline-flex items-center gap-2 px-8 py-4 border border-primary text-primary font-bold rounded hover:bg-primary hover:text-bg-primary transition-all text-lg"
         >
-          Start the Guide <ArrowRight size={20} />
+          Start Reading <ArrowRight size={24} />
         </Link>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { useLocation, Link } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, Menu } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Menu, Sun, Moon } from 'lucide-react';
 import { navigation } from '../data/navigation';
+import { useTheme } from '../context/ThemeContext';
 
 interface BottomNavProps {
   onMenuClick: () => void;
@@ -8,6 +9,7 @@ interface BottomNavProps {
 
 const BottomNav = ({ onMenuClick }: BottomNavProps) => {
   const location = useLocation();
+  const { theme, toggleTheme } = useTheme();
   
   // Flatten navigation for easy traversal
   const flatNav = navigation.flatMap(item => {
@@ -28,36 +30,46 @@ const BottomNav = ({ onMenuClick }: BottomNavProps) => {
   const next = currentIndex < flatNav.length - 1 ? flatNav[currentIndex + 1] : null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 bg-black border-t border-white/10 p-4">
+    <div className="fixed bottom-0 left-0 right-0 z-40 bg-bg-primary border-t border-border p-4 transition-colors duration-200">
       <div className="max-w-3xl mx-auto flex items-center justify-between">
         {prev ? (
           <Link 
             to={prev.path}
-            className="p-2 text-white/60 hover:text-white transition-colors flex items-center gap-2 group"
+            className="p-2 text-primary/60 hover:text-primary transition-colors flex items-center gap-2 group"
             title={`Previous: ${prev.title}`}
           >
             <ChevronLeft size={20} />
-            <span className="hidden sm:inline text-sm font-medium group-hover:underline decoration-white/30 underline-offset-4">{prev.title}</span>
+            <span className="hidden sm:inline text-sm font-medium group-hover:underline decoration-primary/30 underline-offset-4">{prev.title}</span>
           </Link>
         ) : (
           <div className="w-10" /> // Spacer
         )}
 
-        <button 
-          onClick={onMenuClick}
-          className="p-3 rounded-full border border-white/20 text-white hover:bg-white hover:text-black transition-all"
-          title="Open Menu"
-        >
-          <Menu size={20} />
-        </button>
+        <div className="flex items-center gap-4">
+          <button 
+            onClick={toggleTheme}
+            className="p-3 rounded-full border border-border text-primary hover:bg-bg-secondary transition-all"
+            title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+          >
+            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
+
+          <button 
+            onClick={onMenuClick}
+            className="p-3 rounded-full border border-border text-primary hover:bg-bg-secondary transition-all"
+            title="Open Menu"
+          >
+            <Menu size={20} />
+          </button>
+        </div>
 
         {next ? (
           <Link 
             to={next.path}
-            className="p-2 text-white/60 hover:text-white transition-colors flex items-center gap-2 group"
+            className="p-2 text-primary/60 hover:text-primary transition-colors flex items-center gap-2 group"
             title={`Next: ${next.title}`}
           >
-            <span className="hidden sm:inline text-sm font-medium group-hover:underline decoration-white/30 underline-offset-4">{next.title}</span>
+            <span className="hidden sm:inline text-sm font-medium group-hover:underline decoration-primary/30 underline-offset-4">{next.title}</span>
             <ChevronRight size={20} />
           </Link>
         ) : (

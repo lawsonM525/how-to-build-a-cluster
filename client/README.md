@@ -4,14 +4,25 @@ An interactive guide and boilerplate for building compute clusters, built with R
 
 ## Features
 
-- **Interactive Guide Structure**: Organized into chapters (Hardware, Networking, OS, Management, Applications).
-- **Custom Theme**: "The Robots" color scheme (Dark mode optimized).
+- **Interactive Guide Structure**: Organized into 7 Parts:
+  1. Conceptual Foundations
+  2. Hardware Engineering
+  3. Software Foundation
+  4. Infrastructure Services
+  5. The Workload Manager
+  6. Parallel Programming
+  7. Validation & Security
+- **Minimalist Design**:
+  - **Dark Mode**: High contrast, white text on black background (The Robots theme).
+  - **Light Mode**: Accessible black text on white background.
+  - **Theme Toggle**: Switch between modes via the bottom navigation bar.
+- **Reader Mode Layout**: Centered content with minimized distractions.
 - **Reusable Components**:
-  - `Terminal`: Styled terminal window for command outputs.
-  - `CodeBlock`: Syntax highlighting-ready code blocks with copy functionality.
-  - `Note`: Callout boxes for info, warnings, and success messages.
-  - `Sidebar`: Responsive navigation with expandable sections.
-  - `Pagination`: Automated next/previous chapter navigation.
+  - `Terminal`: Styled terminal window for command outputs (Themed).
+  - `CodeBlock`: Syntax highlighting-ready code blocks with copy functionality (Themed).
+  - `Note`: Callout boxes for info, warnings, and success messages (Themed).
+  - `Sidebar`: Slide-over navigation for all screen sizes.
+  - `BottomNav`: Persistent navigation controls and theme toggle.
 - **Tech Stack**:
   - React 19
   - TypeScript

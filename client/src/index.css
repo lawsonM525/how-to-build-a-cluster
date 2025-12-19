@@ -2,32 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color-scheme: dark;
+@layer base {
+  :root {
+    /* Light Mode (Default) */
+    --bg-primary: 255 255 255;
+    --bg-secondary: 245 245 245; /* gray-100 */
+    --text-primary: 0 0 0;
+    --text-secondary: 60 60 60;
+    --border-primary: 220 220 220; /* gray-200 */
+    --accent: 0 0 0;
+  }
+
+  .dark {
+    /* Dark Mode */
+    --bg-primary: 0 0 0;
+    --bg-secondary: 20 20 20;
+    --text-primary: 255 255 255;
+    --text-secondary: 200 200 200;
+    --border-primary: 50 50 50;
+    --accent: 255 255 255;
+  }
 }
 
 body {
-  @apply bg-black text-white font-sans antialiased;
+  @apply bg-primary text-primary font-sans antialiased transition-colors duration-200;
 }
 
 code {
-  @apply font-mono text-white/90 bg-white/10 px-1 py-0.5 rounded text-sm;
+  @apply font-mono text-primary/90 bg-secondary px-1 py-0.5 rounded text-sm;
 }
 
 pre {
-  @apply bg-black border border-white/20 p-4 rounded-lg overflow-x-auto;
+  @apply bg-primary border border-border p-4 rounded-lg overflow-x-auto;
 }
 
 pre code {
-  @apply bg-transparent p-0 text-white;
+  @apply bg-transparent p-0 text-primary;
 }
 
 a {
-  @apply text-white underline decoration-white/30 decoration-2 underline-offset-4 hover:decoration-white transition-all;
+  @apply text-primary underline decoration-primary/30 decoration-2 underline-offset-4 hover:decoration-primary transition-all;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  @apply font-bold tracking-tight text-white;
+  @apply font-bold tracking-tight text-primary;
 }
 
 h1 {
@@ -35,7 +53,7 @@ h1 {
 }
 
 h2 {
-  @apply text-2xl mb-6 mt-12 border-b border-white/20 pb-2;
+  @apply text-2xl mb-6 mt-12 border-b border-border pb-2;
 }
 
 h3 {
@@ -43,11 +61,11 @@ h3 {
 }
 
 p {
-  @apply leading-7 mb-4 text-white/80;
+  @apply leading-7 mb-4 text-primary/80;
 }
 
 ul {
-  @apply list-disc list-outside mb-4 ml-4 text-white/80;
+  @apply list-disc list-outside mb-4 ml-4 text-primary/80;
 }
 
 li {
@@ -55,7 +73,7 @@ li {
 }
 
 blockquote {
-  @apply border-l-2 border-white/40 pl-4 italic text-white/60 my-6;
+  @apply border-l-2 border-border pl-4 italic text-primary/60 my-6;
 }
 
 /* Custom Scrollbar */
@@ -65,13 +83,13 @@ blockquote {
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-black;
+  @apply bg-primary;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-white/20 rounded-full;
+  @apply bg-border rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-white/40;
+  @apply bg-primary/40;
 }

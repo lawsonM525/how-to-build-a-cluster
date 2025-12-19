@@ -7,7 +7,7 @@ const MainLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-base01 text-base08 font-sans flex flex-col">
+    <div className="min-h-screen bg-bg-primary text-primary font-sans flex flex-col transition-colors duration-200">
       <Sidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
       
       <main className="flex-1 flex flex-col min-w-0 pb-24"> {/* Added padding bottom for fixed nav */}
