@@ -1,4 +1,5 @@
-import { FileText, Book } from 'lucide-react';
+import { FileText, Book, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const ClassSources = () => {
   const sources = [
@@ -8,32 +9,46 @@ const ClassSources = () => {
         { 
             title: "GPU Computing", 
             desc: "Owens et al. - A comprehensive overview of General-Purpose computing on Graphics Processing Units (GPGPU), discussing architecture, programming models, and applications.",
-            filename: "GPU_Computing.pdf"
+            filename: "GPU_Computing.pdf",
+            usedIn: [
+              { path: "/apps/mpi", section: "GPU Programming", desc: "Concepts from this paper inform our discussion of GPU architecture and parallel computing models." }
+            ]
         },
         { 
             title: "Version Control with Git", 
             desc: "Summary and Setup guide for using Git in collaborative environments, emphasizing its role as the 'lab notebook' of the digital world.",
-            filename: "Version Control with Git_ Summary and Setup.pdf" 
+            filename: "Version Control with Git_ Summary and Setup.pdf",
+            usedIn: []
         },
         { 
             title: "Cramming more components onto integrated circuits", 
             desc: "Gordon E. Moore (1965) - The seminal paper establishing 'Moore's Law', predicting the exponential growth of component density on integrated circuits.",
-            filename: "moore-crammingmorecomponents.pdf" 
+            filename: "moore-crammingmorecomponents.pdf",
+            usedIn: [
+              { path: "/foundations/intro", section: "Moore's Law & Its Limits", desc: "Extensively quoted and analyzed in our introduction to the historical context of computing power evolution and its impact on cluster computing." }
+            ] 
         },
         { 
             title: "A high-performance, portable implementation of the MPI message passing interface standard", 
             desc: "Gropp, Lusk, & Skjellum (1996) - Introduction to MPICH, discussing the practical aspects and experiences of implementing the MPI standard.",
-            filename: "mpi performance (1).pdf" 
+            filename: "mpi performance (1).pdf",
+            usedIn: [
+              { path: "/apps/mpi", section: "Message Passing Interface (MPI)", desc: "Core concepts from this paper are implemented in our MPI examples and explanations of distributed memory programming." }
+            ] 
         },
         { 
             title: "Slim Fly: A Cost Effective Low-Diameter Network Topology", 
             desc: "Besta & Hoefler (SC '14) - Proposal for a high-performance network topology that approaches theoretically optimal diameter, offering advantages in latency and cost.",
-            filename: "sf_sc_2014 (3).pdf" 
+            filename: "sf_sc_2014 (3).pdf",
+            usedIn: [] 
         }, 
         {
             title: "An Even Easier Introduction to CUDA",
             desc: "NVIDIA Technical Blog - A hands-on introduction to writing CUDA C++ code, covering memory allocation, kernel launches, and thread hierarchy.",
-            filename: "An Even Easier Introduction to CUDA (Updated) _ NVIDIA Technical Blog.pdf"
+            filename: "An Even Easier Introduction to CUDA (Updated) _ NVIDIA Technical Blog.pdf",
+            usedIn: [
+              { path: "/apps/mpi", section: "Programming with CUDA", desc: "The comprehensive CUDA programming section is based on this article, including code examples, memory management concepts, and performance insights." }
+            ]
         }
       ]
     }
@@ -65,12 +80,32 @@ const ClassSources = () => {
                 >
                   <div className="flex items-start gap-4">
                     <FileText className="text-primary/60 mt-1 shrink-0" size={20} />
-                    <div>
+                    <div className="w-full">
                       <h3 className="text-lg font-bold text-primary mb-1">{item.title}</h3>
                       <p className="text-primary/70 mb-2">{item.desc}</p>
                       <span className="text-xs font-mono text-primary/40 bg-bg-secondary/30 px-2 py-1 rounded">
                         {item.filename}
                       </span>
+                      
+                      {item.usedIn && item.usedIn.length > 0 && (
+                        <div className="mt-4 border-t border-border pt-3">
+                          <h4 className="text-sm font-bold text-primary mb-2">Used in the Guide:</h4>
+                          <div className="space-y-2">
+                            {item.usedIn.map((reference, idx) => (
+                              <div key={idx} className="bg-bg-secondary/20 p-3 rounded">
+                                <Link 
+                                  to={reference.path}
+                                  className="flex items-center gap-1 text-sm font-medium text-primary hover:underline"
+                                >
+                                  <ArrowRight size={14} />
+                                  <span>{reference.section}</span>
+                                </Link>
+                                <p className="text-xs text-primary/70 mt-1">{reference.desc}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

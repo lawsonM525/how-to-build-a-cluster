@@ -201,7 +201,7 @@ const Design = () => {
             </div>
         </div>
         <Note type="info" title="CUDA">
-            If you plan to use NVIDIA GPUs, you'll be working with <strong>CUDA</strong>. Check the <Link to="/apps/optimization" className="underline">Optimization</Link> chapter for libraries.
+            If you plan to use NVIDIA GPUs, you'll be working with <strong>CUDA</strong>. Check the <Link to="/apps/mpi" className="underline">GPU Programming</Link> section.
         </Note>
       </section>
 
