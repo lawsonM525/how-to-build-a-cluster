@@ -1,0 +1,299 @@
+CS 352 Seminar: Parallel Programming
+02: Computer Architecture
+
+Prof. Michael Robson
+
+09/10/2025
+Announcements
+
+HW 1
+> Due Friday 9/12 at 11:59 PM
+Hw 2
+
+> Releasing soon
+Pm Due Friday 9/19 at 11:59 PM
+
+Student/Office/Drop-in Hours
+
+> Bass 110
+
+> Tuesday 11:30 - 12:30
+> Friday 3:00 - 4:00
+
+> By Appointment: TBA
+ad SOFTWARE
+
+INSTALLATION
+FAIR
+
+Need help installing software?
+
+—— Python
+— Java
+—— VS Code
+
+—— R Studio
+
+—— and more
+
+McConnell Foyer
+Thursday, September 11th
+3:08 - 5:00 pm
+
+® “GRU
+
+Outline
+
+> Moore's Law
+
+> Computer Architecture
+>» FLOPs
+
+> Hands-On
+Switches: A Brief History
+
+on/off, 1/0
+many types:
+
+Pm vaccum tubes
+
+> Hall switch
+
+P electromechanical (electromagnets)
+> (CMOS/MOSFET) transistors!
+Switches: Hands-On Example
+
+COMPUTER
+|} ENGINEERING
+
+FOR BABIES
+
+eo
+
+Clock Speeds and a Virtuous Cycle
+
+Clock speed (or cycle) is selected so that the parts of the CPU can
+finish basic calculations within the cycle
+
+Commonly measured in GHz (billions of times per second)
+Making transistors smaller
+
+P they go faster (quicker to turn on/off)
+> fit more per unit area
+Moore’s Law
+
+The complexity for minimum component costs has increased
+at a rate of roughly a factor of two per year. Certainly over the
+short term this rate can be expected to continue, if not to increase.
+Over the longer term, the rate of increase is a bit more uncertain,
+although there is no reason to believe it will not remain nearly
+constant for at least 10 years. - Gordon Moore
+
+Commonly, “computer performance doubles every 18-24 months”
+
+More precisely, the number of transistors per unit area (per dollar)
+doubles every two years
+Moore’
+Moore's law de
+[his acvane
+
+Transistor count
+50,000,000,000
+
+arity that the number of cransistors on integrated circuit
+nological progress in comauting sucn
+
+Law: The number of transistors on microchips doubles ev ery two years
+S Data
+
+10,000,000,000
+5,000,000,000
+
+1,000,000,000
+500,000,000
+
+100,000,000
+50,000,000.
+
+o
+PB grant cogersine SHY nme?
+
+10,000,000 AML Ki Proce |
+5,900,000 feotim cg, eae
+
+om
+
+1,000,000 a a
+500,000 7
+
+100,000 7
+50,000 gees cots
+
+10,000,
+
+°
+
+5,000
+
+er
+
+Ad ae Ohh ah gO BO oo io ob 1 ® 2D 0h oh 9 0 0
+LP ES Bh oP AP oh oP 6h” on” ool GO Ph OP PF
+OE REE ER SE ST SEE TOE te ee ae
+
+| Year in which the microchip
+
+ CC-BY by the author
+
+Hannah Richie ard Max R
+
+Activity: Draw A Computer!
+
+1. Get in to groups
+2. Go to a whiteboard
+3. Draw the parts of a computer
+Computer Architecture
+
+> CPU/Microprocessor
+» Measuring Performance
+> Memory Heirarchy
+
+>» Persistent Storage
+CPU Components
+
+ALU
+Registers
+> PC
+
+Caches
+CPU ISAs
+
+Intel/AMD x86
+ARM
+
+RISC-V
+POWER
+
+other custom silicon
+Measuring/Evaluating Hardware: FLOPS
+
+Floating Point Oerations Per second
+Top500 - ExaFlop!
+Common Examples
+
+>» GPU
+>» CPU
+>» Watch?
+
+Somewhat fuzzy with “Al” FLOPs now
+
+Raw measure of CPU performance (does not measure
+memory(RAM/IO) bandwidth or other factors)
+Calculate FLOPs: Example
+
+Kaby Lake
+Clock Freq: 2.8 GHz
+
+Cores: 2
+
+FLOPs/Cycle: 16
+Memory: Key Terms
+
+Latency - time to fetch 1 byte
+
+Bandwidth - throughput e.g. bytes/s
+Memory Heirarchy
+Memory Heirarchy
+
+a
+——
+Memory |
+
+Persistent Storage
+
+HDD - Hard Disk Drive
+SSD - Solid State Drive
+Tape (yes that tape)
+
+Parallel File System
+Typical Speeds (HW 2)
+
+Latency Bandwidth
+
+Modern processor
+L1 cache
+
+L2-L3 cache
+DRAM
+
+Solid state drive
+Hard drive
+
+Network: Cluster
+
+Network: Ethernet
+
+Network: World-wide-web
+Putting it All Together
+
+Putting it All Together
+
+Components of a Stored-Program computer
+
+PC (Program Counter
+
+Move to the
+next location Register Set
+
+Instruction
+
+Figure 1: Credit: Laxmikant “Sanjay” Kale
+Lab Activity 1: Open Up and ID
+
+Part 1:
+
+- Go over to lab
+
+- Take a piece of scratch paper
+
+- Grab a cluster node
+
+- Open up and document graphically/with pictures the parts
+
+Part 2:
+
+- Put the cover back up
+
+- Find a monitor (or share)
+
+- Boot up and confirm/cross check!
+- Turn in results
+Our Hardware
+
+Dell Optiplex 5050
+
+CPU:
+Memory:
+HD/SSD:
+Peripherals:
+HW 2 Preview/For Next Time
+
+1. Estimate/calculate theoretical peak FLOPs of:
+
+» Your computer
+» Single node in cluster
+>» Our entire system
+
+2. Measure (via Linpack) the actual peak
+3. Fill in table of memory latencty/bandwidth
+4. Read
+
+>» Gordon Moore’s original article (Moodle)
+> OS/Linux Server Distros
+
+5. Prep for “distro debate” (teams forthcoming)
+6. Synthesize mission statements
+Optional
+
+> Hennesy and Patterson Book
+» Magic School Bus episode

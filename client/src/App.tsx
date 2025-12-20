@@ -14,6 +14,7 @@ import Optimization from './pages/apps/Optimization';
 import Benchmarking from './pages/perf-sec/Benchmarking';
 import Security from './pages/perf-sec/Security';
 import Resources from './pages/appendix/Resources';
+import ClassSources from './pages/appendix/ClassSources';
 import NotFound from './pages/NotFound';
 import ScrollToTop from './components/ScrollToTop';
 
@@ -76,6 +77,7 @@ function App() {
           <Route path="appendix">
             <Route index element={<Navigate to="/appendix/resources" replace />} />
             <Route path="resources" element={<Resources />} />
+            <Route path="class-sources" element={<ClassSources />} />
           </Route>
 
           {/* Fallback */}

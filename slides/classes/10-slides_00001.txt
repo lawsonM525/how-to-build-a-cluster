@@ -1,0 +1,83 @@
+CS 352 Seminar: Parallel Programming
+10: Infrastructure Week!
+
+Prof. Michael Robson
+
+10/08/2025
+Announcements
+
+HW 4
+> Due yesterday 10/7 Frdayt0/3 at 11:59 PM
+
+> Extension form on Moodle
+HW 5
+
+> Releasing today
+> Due 10/15 at 11:59 PM
+
+Student/Office/Drop-in Hours
+
+> Tuesday 11:30 - 12:30 in Bass 110
+> Friday 3-69—4-00 3:30 - 4:30 in Bass 210/211
+» By Appointment: Schedule Link
+
+monster.ddns.smith.edu up and running!
+Outline
+
+Infrastructure Discussion
+Discussion Questions
+
+» How to manage updates?
+» How to manage shared infrastructure
+>» Which Network/Distributed File Systems?
+
+| will take notes, summarize discussion
+Managing Updates
+Managing Shared Infrastructure
+
+> bash/shell scripts
+
+> Nix/Guix
+
+> Ansible(/chef/puppet)
+> others
+Network File Systems:
+
+Should we stick with NFS? Possible Alternatives:
+
+vvvvvy
+
+lustre
+ceph
+BeeGFS
+hadoop
+gluster?
+
+sshfs?
+etc
+Bonus Questions
+
+How/do we want to replicate user(s) across multiple nodes? - do we want multiple
+users?
+
+Implement a module systems?
+
+> environment modules
+> Imod
+
+User installed software? e.g. with spack
+
+Monitoring with Ganglia or Prometheus + Grafana
+HW 5
+
+vvegyvyéeyYv
+
+Run benchmark vs FLOPs
+Basic MPI app/test (Pi?)
+Reading: MPI Paper
+Install Infra:
+
+» /etc/hosts
+>» NFS
+
+> other tools

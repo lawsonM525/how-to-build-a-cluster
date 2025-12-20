@@ -1,0 +1,125 @@
+CS 352 Seminar: Parallel Programming
+20: Cluster Schedulers (cont.}
+
+Prof. Michael Robson
+
+11/14/2025
+Announcements
+
+Cluster Standardization ongoing
+HW 6 (past due)
+
+> Due 11/11 at 11:59 PM
+HW 6.5
+
+Pm Due 11/14 at 11:59 PM
+HW 7
+
+Final Projects Assigned - start working now
+Outline
+
+Scheduler Discussion Wrapup
+Final Project Organization
+
+HW 6.5 and 7
+Scheduler Policies
+
+Vv
+
+Queues?
+Priority?
+» Big over small?
+>» Long over short?
+Per-user/group/etc
+Pre-emption?
+Overlap resources?
+Interactive jobs?
+
+Vv
+
+vvvyv
+Final Project
+Split into 3 groups of 4 and picked an SC '25 pair:
+
+Pair Benchmark Application
+
+1 MLPerf Exascale Climate Emulator
+2 HPL-MxP — Structural Simulation Toolkit
+3 HPL Reproducibility Challenge
+
+Get running, tune, and design report on results.
+
+Present work on last day of class 12/10 - 15-20 minutes per group
+Final report due last day of finals 12/19
+
+Groups
+
+1. Ronin, Glenvelis, Sarah, Bintu
+2. Sydney, Molly, Maggie, Ashley
+3. Mary, Ashby, Tajhini, Michelle
+Final Proj. Timeline/Check in
+
+1. Initial numbers
+
+> (11/14) Benchmark running
+> (11/21) App running
+
+2. (12/5) Optimize cluster
+» compilers, flags, build process, software, hardware, libraries, etc
+3. (12/10) Present current results
+4. (12/11-12/18) Write final repot draft
+5. (12/19) Turn in final report
+HW 6
+
+1. Submit a short reflection on setting up the shared infrastructure using Ansible etc.
+2. Submit a research report on SLURM v Kubernetes v other schedulers.
+
+3. Attempt one of the Ansible tutorials on the CS 352 Wiki and submit your notes.
+HW 6.5
+
+0. Complete the linked Mid Semester Assessment Google Form.
+
+1. Implement a naive library routine and measure it’s performance relative to an
+optimized library implementation.
+
+2. Read the posted paper on algorithmic optimizations in HPC and submit your notes.
+
+3. Submit a Budget Proposal for $850 to improve the cluster (optional but required in
+HW 07}
+HW 7
+
+Due Date: 11/21?
+
+0.
+1.
+
+Read GPU Paper and submit a short reflection and/or notes
+
+Complete in-class vectorization example with demonstrated speedups, include your
+code, vectorization report, and a graph or table of performance
+
+Discussion reflection from Kubernetes/SLURM/Flux debate and vote
+
+Submit a Budget Proposal for $850 to improve the cluster (optional but required in
+HW 07}
+
+Debian vote of no/confidence?
+
+install GPUs?
+Final Project Working Time / Office Hours
+Lab Time
+
+Let's (try) setting up a scheduler
+Quick Start Pointers (Debian 13) via ChatGPT-5
+
+>» SLURM:
+> Controller + compute nodes; configure slurm.conf (NodeName, PartitionName).
+>» Enable cgroups and backfill; set accounting if you want fair-share.
+> MPI:
+> Install OpenMPI or MPICH on all nodes; test with hello_mpi and srun.
+> Networking:
+> Ensure consistent hostnames, time sync (chrony), passwordless SSH for admin, shared
+home or NFS for job I/O (careful with NFS hotspots).
+> Containers:
+>» Apptainer integrates well with SLURM for HPC workflows; no root daemon required.
+Questions?

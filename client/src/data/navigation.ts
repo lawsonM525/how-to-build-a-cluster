@@ -67,7 +67,8 @@ export const navigation = [
     path: "/appendix",
     icon: BookOpen,
     chapters: [
-      { title: "Resources & Glossary", path: "/appendix/resources" }
+      { title: "Resources & Glossary", path: "/appendix/resources" },
+      { title: "Class Sources", path: "/appendix/class-sources" }
     ]
   }
 ];

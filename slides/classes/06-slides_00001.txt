@@ -1,0 +1,224 @@
+CS 352 Seminar: Parallel Programming
+06: Networking Lab
+
+Prof. Michael Robson
+
+09/26/2025
+Announcements
+
+HW 3
+
+Pm Due today(!), Friday 9/26 at 11:59 PM
+» Extension form on Moodle
+
+HW 4
+> Due Friday 10/3 at 11:59 PM
+Student/Office/Drop-in Hours
+
+> Bass 110
+
+> Tuesday 11:30 - 12:30
+
+> Friday 3:00—4:00 3:30 - 4:30
+
+» By Appointment: Schedule Link
+Outline
+
+Ratify
+
+> Mission Statement
+> Documentation
+> Install Procedures
+
+Lab: Networking
+HW4
+
+Lecture: Benchmarks?
+Mission Statement
+
+Brainstorm
+Discussion
+
+Ratify final version
+Themes
+
+Community
+
+>
+>
+
+»
+
+Smith students
+inclusive/accesible/diverse/value
+aligned
+
+energy eficiency/environmental
+impact
+
+Long term use
+
+»
+
+vvvyv
+
+research
+
+teaching /tool
+
+personal projects
+low/no cost
+planning/documentation
+
+Variety of applications (not just HPC)
+> HPL
+> AI/ML
+> computational science
+> reproducible
+Technical Properties
+» performance
+> reliability
+large(r) scale/able
+» experiment with GPUs
+1 (or 2) systems/partitions
+Fun! Learning! Pride!
+
+Vv
+
+Vv
+LLM Synthesis Prompts
+
+Synthesize the following student responses to create a singular “Mission Statement” for
+the parallel computing cluster we are building for our course:
+
+Please elucidate the primary themes in the combined mission statement into a bulleted
+outline.
+
+Make this more concise.
+GPT-40
+
+The mission of our parallel computing cluster is to provide Smith students with a
+high-performance computational tool that empowers innovation, collaboration, and
+exploration. Through the process of building this system, students will gain hands-on
+experience in designing and operating a cluster that is both functional and efficient —
+capable of addressing problems too large or complex for single machines to solve. This
+project, inspired by benchmarks from the Student Cluster Competition (SCC) and
+guided by principles of energy-conscious computing, will balance performance,
+sustainability, and accessibility.
+
+Our goals include fostering creativity, technical expertise, and teamwork as we build a
+resource that will support a range of academic pursuits, from running Al and machine
+learning models to conducting scientific simulations and exploring reproducible
+environments for experimentation. The cluster will be designed to enable a wide variety
+of applications, such as data analysis, neural network training, and even interactive,
+simulated worlds where complex systems can be analyzed.
+GPT-4o (cont.)
+
+This mission is guided by a commitment to inclusivity, open science, and ethical
+technology. We aim to create an accessible and robust system that will serve students
+and faculty beyond our class, offering tools for research, education, and personal
+exploration. By engaging in this project, we hope to inspire the next generation of
+computer scientists and cultivate an environment of respect, curiosity, and fun.
+
+Ultimately, this project will not only produce a valuable computing resource for the
+Smith community but will also serve as a model of how collaborative innovation can
+solve real-world problems responsibly and creatively.
+Outline of Primary Themes
+1. Purpose and Goals
+
+> Build a high-performance parallel computing cluster to solve complex problems
+
+beyond single machines.
+> Enable a variety of applications (e.g., AI/ML, simulations, data analysis, and more).
+>» Balance performance with energy efficiency and sustainability.
+
+2. Educational Focus
+
+> Provide hands-on learning in cluster design, operating systems, networking, and
+parallel programming.
+
+> Foster teamwork, collaboration, and creative problem-solving.
+
+> Engage with industry benchmarks (e.g., Student Cluster Competition) to inspire
+and evaluate progress.
+
+3. Post-Build Objectives
+
+» Serve as a reliable resource for Smith students and faculty for research and learning.
+» Prioritize accessibility and reproducibility to support open science.
+Outline of Primary Themes (cont.)
+
+4. Ethical and Inclusive Values
+
+>» Promote socially responsible and inclusive technology aligned with Smith College's
+
+mission.
+» Encourage participation from diverse academic backgrounds and foster belonging in
+
+HPC.
+5. Creativity and Community
+
+» Incorporate playful, innovative experimentation to make the project enjoyable.
+> Design a resource that supports multidisciplinary research and inspires future
+collaborations.
+
+6. Long-Term Impact
+
+>» Deliver a functional, sustainable, and community-driven system for ongoing
+academic use.
+Documentation
+
+Status of Shared Wiki?
+Install Procedures
+
+Discuss!
+Lab - Putting them all together!
+Head Node
+
+> Which?
+> Setting up WiFi/Internet
+> Set up SSH (including keys)
+
+Networking
+
+> Switch/Network together
+
+> Assigning static IPs
+> /etc/network/interfaces
+> nmtui/NetworkManager
+
+/etc/hostname
+
+/etc/hosts
+
+ssh keys
+
+Test network latency with ping and iperf3
+MPI? (/hostfile)
+
+vvvvyv
+
+S
+
+i)
++
+
+up Network File System?
+HW 4
+
+Network/Setup (reinstall?) the rest of the nodes
+Reading: SlimFly paper
+Research:
+
+» How to do updates?
+» How to manage shared infra
+» lots o’ bash scripts
+P nix/guix?
+> ansible(/chef/puppet)?
+> others?
+> Network: dhcp server vs static ips
+> Network/Distributed File Systems: Alternatives? Should we stick with NFS?
+
+Run (single node) benchmark vs FLOPs
+
+git tutorial

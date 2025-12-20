@@ -1,0 +1,234 @@
+Debian Stable Install Instructions
+- Check that your node has not already been configured (here)
+- Transfer Debian Stable to flash drive (or acquire flash drive with Debian Stable already downloaded)
+- Plug in the monitor and the computer to a power source
+- Plug in the monitor, keyboard, and flash drive to the computer
+- Turn on the computer and monitor and spam the F12 key
+- Once at the Dell Boot screen, under the UEFI BOOT, arrow down to UEFI: 8.07 and press the enter key
+- On the Debian screen, select Graphical Install
+- Select language, country, and keyboard information
+- On the configure the network screen: select wireless ? Connect2Smith ? WEP/Open Network
+- When prompted for a WEP key, press the enter key
+- Network autoconfiguration failed error! ? press the enter key ? select do not configure the network at this time
+- Enter your chosen host name and press enter
+- Enter your chosen password (mpr + ITS digits after the 0) and continue to the next page
+- Enter your username (mpr) as the "chosen name" and then on the next page as the username
+- Enter your chosen password again
+- Select time zone (Eastern)
+- On the partition disks screen: select Guided - use entire disk
+- Select TOSHIBA 256 GB to write on the disk
+- Select All files in one partition (recommended for users)
+- Select Finish partitioning and write changes to disks ? Yes (to write the changes to disk)
+- "No network mirror was selected, continue without a network mirror" ? yes
+- Configuring popularity contest page: select no
+- Software selection page: press the tab key then the enter key (to leave standard systems utilities checked)
+- Installation is complete ? press the enter key to reboot
+- Once the system has rebooted and says [Hostname] login: type your username and press enter ? type your password and press enter
+- Congratulations!
+
+Install Tracker
+
+
+
+
+SSH to HeadlessHorseperson
+To get IP address on node: ip -c address
+- Mac Instructions
+- ssh-keygen
+- ssh-copy-id name@ip
+-	[ip] ipv4 address for head node
+- yes
+- 
+
+- Windows Instructions
+- ssh [ip]
+- yes
+- enter the password:
+- Command to enter to ssh in to headnode:
+- ssh [ip]
+
+
+Set up Networking/SSH
+
+Maggie/Ashby Notes:
+Set Up Static Up:
+ip a
+- Pulls up information you are changing
+- Interface name is the name is blue next to 2: enp0s31f6
+su -
+   - Enter root password nano /etc/network/interfaces Type: # primary interface
+auto <interfaceName>
+iface <interfaceName> inet static address [ip]
+gateway [ip]
+
+systemctl restart networking ip a
+- Now you should see UP in green
+
+Enable Internet:
+nano /etc/resolv.conf -> (It will take you to an editor to type the info below) Type: nameserver [ip]
+nameserver [ip]
+
+Test Work:
+systemctl reboot Log back in as root ping 192.168.0.201
+Should get a response back
+
+Enable Repos:
+nano /etc/apt/sources.list -> (It will take you to an editor to type the info below) Type:
+deb http://deb.debian.org/debian/ trixie main non-free-firmware deb-src http://deb.debian.org/debian/ trixie main non-free-firmware
+
+deb http://security.debian.org/debian-security trixie-security main non-free-firmware deb-src http://security.debian.org/debian-security trixie-security main
+non-free-firmware
+
+
+
+[DOESN'T WORK] Enable SSH:
+apt update
+apt install openssh-server
+
+
+Michael Notes:
+Set up Static IP and Bring up Interface NetworkConfiguration - Debian Wiki
+ip link OR ip a su root
+nano (OR vi) /etc/network/interfaces auto <interfaceName>
+
+iface <interfaceName> inet static address [ip]
+gateway [ip]
+
+Note: This is in a separate paragraph from loopback interface details.. You need both the loop back interface and the static interface. The final file would look something like this:
+# The loopback network interface auto lo
+iface lo inet loopback
+
+# The primary network interface (static and for ethernet) auto enp031f6
+iface enp031f6 inet static address [ip address] gateway [ip address]
+
+
+
+Enable Internet by connecting green cord to computer resolv.conf - Debian Wiki
+
+nano /etc/resolv.conf -> (It will take you to an editor to type the info below) nameserver [ip]
+nameserver [ip]
+
+Enable repos
+SourcesList - Debian Wiki
+nano /etc/apt/sources.list -> (It will take you to an editor to type the info below) deb http://deb.debian.org/debian/ trixie main non-free-firmware
+deb-src http://deb.debian.org/debian/ trixie main non-free-firmware
+
+      deb http://security.debian.org/debian-security trixie-security main non-free-firmware
+      deb-src http://security.debian.org/debian-security trixie-security main non-free-firmware
+
+Enable ssh
+
+https://wiki.debian.org/SSH
+
+apt update
+apt install openssh-server
+
+su
+enter your node's password apt update
+apt install openssh-server
+
+On your computer, open terminal ssh [ip address]
+Password:
+Ssh
+
+Unattended-upgrades installation
+
+Step 1: Install on head node https://wiki.debian.org/PeriodicUpdates https://github.com/mvo5/unattended-upgrades
+
+Current configuration:
+- No new features, just security
+
+To configure email:
+- sudo nano /etc/apt/apt.conf.d/50unattended-upgrades
+- Find and edit these lines:
+- Unattended-Upgrade::Mail "[email]";
+- Unattended-Upgrade::MailReport "always";
+-	Other options include: "only-on-error" and "on-change"
+- Install packages to send email:
+- sudo apt install -y bsd-mailx postfix
+- Configured to only run once a week on Monday:
+- sudo systemctl edit apt-daily-upgrade.timer
+- sudo systemctl edit apt-daily.timer
+- Create weekly update email:
+- sudo nano /usr/local/bin/unattended-weekly-report.sh
+- sudo crontab -e
+- 10 7 * * 1 /usr/local/bin/unattended-weekly-report.sh
+- If we want more information, consider apt-listchanges
+
+Update times
+- We set both the upgrade and download times for Monday at 7am.
+
+For Script:
+sudo apt install unattended-upgrades
+- sudo nano /etc/apt/apt.conf.d/50unattended-upgrades
+- Uncomment and set: Unattended-Upgrade::SyslogEnable "true";
+- Uncomment and set: Unattended-Upgrade::SyslogFacility "daemon";
+   - Uncomment and set: Unattended-Upgrade::Verbose "true"; sudo cp 50unattended-upgrades 52unattended-upgrades-local sudo systemctl edit apt-daily-upgrade.timer
+- Put in the correct area: [Timer] OnCalendar=
+OnCalendar=Mon *-*-* 7:00:00 RandomizedDelaySec=0 Persistent=true
+
+sudo systemctl edit apt-daily.timer
+- Put in the correct area: [Timer] OnCalendar=
+OnCalendar=Mon *-*-* 7:00:00 RandomizedDelaySec=0 Persistent=true
+
+
+To run: ansible-playbook -i hosts.ini my_playbook.yml
+
+/etc/hosts Setup:
+Step 1: check you have gcc using: gcc -version
+If you don't have gcc:
+sudo apt update
+sudo apt install build-essential
+
+If sudo doesn't work:
+su -l root (command to bring you to your node's root) apt update
+apt install build-essential
+
+Step 2: use the updateHosts.c script on Github Store this file in the root of your node
+Compile and run:
+gcc updateHosts.c
+(as root or use sudo) ./a.out
+
+Step 3: Check if it worked From root, open /etc/hosts
+17 ip address and names should be added to the end of the file
+
+
+Ansible Tutorials
+https://learnxinyminutes.com/ansible/
+
+https://www.jeffgeerling.com/blog/2020/ansible-101-jeff-geerling-youtube-streaming-seri es
+
+https://github.com/omerbsezer/Fast-Ansible https://docs.ansible.com/ansible/latest/index.html https://www.tutorialspoint.com/ansible/index.htm https://spacelift.io/blog/ansible-tutorial
+
+
+TODO:
+
+1. Setting up SSH keys using ssh-keygen
+a. ssh name@[ip]
+b. ssh name@ your_node_ip
+c. ssh-keygen
+d. ssh-copy-id mpr@[ip]
+e. exit
+f. ssh-copy-id mpr@your_node_ip
+
+2. Setting up sudo
+a. ssh mpr@your_node_ip
+b. su -
+c. Input root password
+d. apt update
+e. apt install sudo
+f. sudo usermod -aG sudo mpr
+g. sudo -l -U mpr
+i. make sure you see "User mpr may run the following commands on this host: (ALL : ALL) ALL"
+
+h. sudo visudo
+i. Input password
+j. At the bottom of the file, add the following
+i. mpr	ALL=(ALL:ALL) NOPASSWD: ALL
+
+Expected result:
+
+Input: sudo -l -U mpr
+
+Output: User mpr may run the following commands on Rowlet: (ALL : ALL) ALL
+(ALL : ALL) NOPASSWD: ALL

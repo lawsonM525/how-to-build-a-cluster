@@ -1,0 +1,68 @@
+CS 352 Seminar: Parallel Programming
+04: Distro Debate
+
+Prof. Michael Robson
+
+09/17/2025
+Announcements
+
+HW 2
+
+> Due tonight (9/19) at 11:59 PM
+» Remember extension policy
+
+HW 3
+
+> Releasing today
+> Due Friday 9/26 at 11:59 PM
+
+Student/Office/Drop-in Hours
+
+> Bass 110
+
+> Tuesday 11:30 - 12:30
+
+» Friday 3:00 - 4:00
+
+> By Appointment: Schedule Link
+Outline
+
+Opening Statements
+Moderated Discussion
+Ranked Choice Vote
+
+Let's Install!
+Opening Statements
+
+OPRWNP
+
+Team RPM: Glenvelis, RGnin
+
+Team Immutable: Sydney, Sarah
+
+Team DEB: Maggie, Ashley
+
+Team Declarative: Ashby, Mary
+
+Team “The Rest”: Michelle, Molly, Tajhini
+Moderated Discussion
+Ranked Choice Vote
+
+Figure 1: https: //www.rcv123.org/ballot /4Gqwxc2jxc495cgCVJWrM6C5
+Let's Install
+
+Figure 2: https://docs.google.com/spreadsheets/d/1-3DMOVGU5sk9sFF8V7gnp-
+|_Idn9sH5GSUmuNt8_MKQ/edit?usp=sharing
+Homework 3
+
+> Install chosen operating system on a solo node
+> Document progress in sheet (above)
+
+> Write a short reflection on the process
+> What went well?
+> What did you struggle with?
+>» What would you do differently?
+» Any other thoughts you want to share
+» Written analysis of pros and cons of various distros presented
+
+>» More to come...

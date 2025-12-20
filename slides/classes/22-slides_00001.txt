@@ -1,0 +1,270 @@
+CS 352 Seminar: Parallel Programming
+22: Graphics Processing Units (GPUs) - Hands-on
+
+Prof. Michael Robson
+
+11/21/2025
+Announcements
+
+Cluster Standardization ongoing
+HW 7
+> Due 11/21
+HW 8
+Pm Due 12/5?
+Final Projects Assigned - continue working
+
+> Don't forget SC’ 25 videos!
+Outline
+
+HW 7
+
+Final Project Organization
+
+Cluster Standardization ongoing
+
+Graphics Processing Units (GPUs) - Hands-on
+HW 8
+HW 7
+
+Due Date: 11/21
+
+Q. Read GPU Paper and submit a short reflection and/or notes
+
+1. Complete in-class vectorization example with demonstrated speedups, include your
+code, vectorization report, and a graph or table of performance
+
+2. Discussion reflection from Kubernetes/SLURM/Flux debate and vote
+
+3. Submit a Budget Proposal for $850 to improve the cluster (optional but required in
+HW 07}
+
+4. Debian vote of no/confidence
+Final Project
+Split into 3 groups of 4 and picked an SC '25 pair:
+
+Pair Benchmark Application
+
+1 MLPerf Exascale Climate Emulator
+2 HPL-MxP — Structural Simulation Toolkit
+3 HPL Reproducibility Challenge
+
+Get running, tune, and design report on results.
+
+Present work on last day of class 12/10 - 15-20 minutes per group
+Final report due last day of finals 12/19
+
+Groups
+
+1. Ronin, Glenvelis, Sarah, Bintu
+2. Sydney, Molly, Maggie, Ashley
+3. Mary, Ashby, Tajhini, Michelle
+Final Proj. Timeline/Check in
+
+1. Initial numbers
+
+> (11/14) Benchmark running
+> (11/21) App running
+
+2. (12/5) Optimize cluster
+» compilers, flags, build process, software, hardware, libraries, etc
+3. (12/10) Present current results
+4. (12/11-12/18) Write final repot draft
+5. (12/19) Turn in final report
+Cluster Standardization
+
+Done’ Task
+
+[X] Install head/worker package(s)
+[X] Unattended upgrades
+
+[S] NFS mounts
+
+[S] Set up multiple users
+
+[~] Set up Spack systemwide
+
+[] /etc/hosts
+
+Spack Issues:
+
+» frankenstein, godzilla, rowlet
+Module Systems (Claud 4.5 Sonnet)
+
+Do we want a module system?
+
+1. Lmod (Recommended)
+» Modern, actively developed Lua-based system
+>» Backward compatible with Environment Modules (TCL)
+» More features: hierarchical modules, spider command, better error messages
+» Most popular in HPC centers today
+2. Environment Modules (Classic)
+> Original TCL-based implementation
+> Simpler, lighter weight
+> Still widely used but less feature-rich than Lmod
+Hands-on
+
+https: //developer.nvidia.com/blog/even-easier-introduction-cuda/
+nvidia-smi
+
+Fri Nov 21 10:08:16 2025
+
+NVIDIA-SMI 555.42.06
+
+Driver Version: 555.42.06
+
+CUDA Version: 12.5
+
+|
+
+|
+
+| GPU Name Persistence-M | Bus-Id Disp.A | Volatile Uncorr. ECC |
+| Fan Temp Perf Pur:Usage/Cap | Memory-Usage | GPU-Util Compute M. |
+| | | MIG M. |
+| |
+| 0 NVIDIA GeForce GTX 1080 Off |  00000000:03:00.0 off | N/A |
+| 27%  23¢ Ww / 180W | 16MiB / 8192MiB | 0% Default |
+| | | |
+| Processes: |
+| GPU GI cI PID Type Process name GPU Memory |
+| ID ID Usage |
+| |
+| 0 N/A N/A 1617 @  /usr/libexec/Xorg OMiB |
+| 0 N/A N/A 1859 G  /usr/bin/gnome-shell 3MiB |
+
+nvprof
+
+# simple/legacy profiler
+nvprof [-o profile.nvvp] [--print-gpu-trace] ./vector_ops_inefficient
+
+# profile
+
+nsys profile -o profile_report ./vector_ops_inefficient
+# view
+
+nsys stats profile_report.qdrep
+
+# GUI version
+
+nsys-ui profile_report.qdrep
+
+# ssh with X forwarding
+
+ssh -X ...
+Figure 1: the grid
+
+Login Instructions
+
+gridlog.smith.edu
+Try Smith username/password, if not:
+
+username: robsonlab
+password: 8P2rW5XABxDZrE
+ORNL CUDA Training Series
+
+Website: https://www.olcf.ornl.gov/cuda-training-series/ GitHub:
+https: //github.com /olcf/cuda-training-series
+
+Topics: 1, 3, 4, 2, etc
+Other Languages
+
+Implement vector addition in at least one other GPU language
+
+>» OpenMP:
+https: //www.openmp.org/wp-content/uploads/openmp-examples-4.5.0.pdf (4.1.3)
+> https: //www.olcf.ornl.gov/wp-content/uploads/2021/08/ITOpenMP_Day1. pdf
+> https: //www.openmp.org/wp-content/uploads/2021-10-20-Webinar-O penMP-
+Offload-Programming-Introduction.pdf
+> Thrust: https: //nvidia.github.io/ccel/thrust/
+> https: //docs.nvidia.com/cuda/archive/9.1/pdf/T hrust_Quick_Start_Guide. pdf
+Pm OpenCL: https://programmerclick.com/article/47811146604/
+> https: //ulhpc-tutorials.readthedocs.io/en/latest/gpu/opencl/
+> https: //eunomia.dev/others/cuda-tutorial/15-opencl-vector-addition/
+» Kokkos: https: //kokkos.org/kokkos-core-wiki/get-started /quick-start.html
+> https: //kokkos.org/kokkos-core-wiki/tutorials-and-examples. html
+> https: //github.com/kokkos/kokkos-tutorials/wiki /Kokkos-Lecture-Series
+> Futhark: https://futhark-lang.org/
+OpenMP
+
+#pragma omp target teams distribute parallel for
+for (int i = 0; i<N; it+) ¢{
+c[i] = ali] + blil;
+Thrust
+
+thrust: :device_vector<float> d_a(n), d_b(m), d_c(n);
+thrust: :transform(d_a.begin(), d_a.end(), d_b.begin(), d_c.begin(),
+thrust: :plus<float>());
+OpenCL
+
+__kernel void vecadd(__global const float *a,
+__global const float *b,
+__global float *c,
+const int n)
+
+int id = get_global_id(0);
+if (id <n) {
+clid] = alid] + blid];
+Kokkos
+
+Kokkos: :parallel_for(n, KOKKOS_LAMBDA(int i) f{
+cli] = ali] + blil;
+4);
+Futhark
+
+let vecadd [n] (a: [m]f£32) (b: [m]f£32): [mn] f£32 =
+map2 (+) ab
+SYCL (not installed)
+
+q.submit([&] (sycl: :handler& h) {
+h.parallel_for(n, [=] (sycl::id<i> i) ¢{
+eli] = ali] + blil;
+1);
+1);
+Hands-on “sampler”
+
+> nvprof
+
+> OLCF Tutorials (1, 3, 4, 2)
+> Alt. Language
+
+OpenMP
+
+Thrust
+
+OpenCL
+
+Kokkos
+
+Futhark
+
+v
+
+vvvyv
+HW 8
+
+Row NB
+
+Finish the Even Easier Intro. to CUDA blog post
+
+Submit a profile for the inefficient CUDA code along with an optimized version
+
+. Submit the completed matrix multiply from OCLF homework 1
+
+. Submit a working vector addition in one (or two) other languages
+
+>» Compare the results in a table or graph versus the C/C+ + baseline
+
+. Write a short reflection answering the following questions (via Al-C4.5S):
+
+>» How does the syntax compare to CUDA?
+
+>» What’s easier/harder?
+
+>» When would you choose this over CUDA?
+
+>» What did you learn about GPU programming from this perspective?
+References
+
+» CUDA C/C++ Basics (SC '11 tutorial):
+https: //www.nvidia.com/docs/l0/116711/sc11-cuda-c-basics.pdf
+Questions?

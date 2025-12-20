@@ -1,0 +1,546 @@
+CS 352 Seminar: Parallel Programming
+03: Operating Systems
+
+Prof. Michael Robson
+
+09/17/2025
+Announcements
+
+HW 2
+> Due Friday 9/19 at 11:59 PM
+Distro Debate
+
+» Teams and Topics on Slack
+> In Class on Friday 9/19
+
+Student/Office/Drop-in Hours
+
+> Bass 110
+
+> Tuesday 11:30 - 12:30
+
+> Friday 3:00 - 4:00
+
+» By Appointment: Schedule Link
+Outline
+
+Systems Definitions
+History
+
+> Unix
+> Linux
+
+Operating System Services
+
+Distro Debate
+What is a Computer System?
+Computer System
+
+One (or more) CPUs
+Device(s) connected through controllers/bus
+Main memory (RAM) with shared access
+
+Requires layer of software to manage aka Operating System
+Definitions
+
+Computer System
+
+The combination of hardware and software (operating system) that forms a complete,
+working computer
+
+Operating System (OS)
+The most important program that runs on a computer
+
+> Manages the hardware
+> Provides an interface to programmers and users
+> Enables other software to run
+Major Evolution of OS
+0. No/Humans as OS (1945 - 1955)
+
+Program binaries were loaded (by hand) using switches
+
+1. Very Simple OS (1955 - 1965)
+
+Library of common subroutines (read, write, etc.)
+
+Single programming (one application at a time)
+
+MEMORY
+
+User Program
+
+Free memory!!!
+
+Operating system
+
+Program P
+
+read
+
+A, end
+
+system call read
+
+begin
+Start I/O
+Wait for I/O to complete
+End I/O
+
+Problem — 1/O devices much, much slower than the CPU
+
+Q: What to do while we wait for the |/O device ?
+2. Multiprogramming (1965 - 1980)
+
+Multiple running programs (processes)
+
+When one process blocks, switch to another
+
+Process A
+
+Process B
+
+Process C
+
+Combined
+
+Run Wait Run Wait
+Wait| Run Wait Run Wait
+. 4) . .
+Wait Run] Wait Run Wait
+VL LLL 4
+Run | Run [Run4 _ Run | Run FRun4 _
+4 B | C4 Wait A B C Wait
+Time
+
+Multiprogramming
+
+A process is a program in execution
+Multiprogramming refers to multiple processes running concurrently
+
+» Processes take turns using the CPU
+> CPU switches to a different process when an I/O request or a timer interrupt occurs
+
+Hardware interrupts are signals issued by 1/O devices to indicate that an I/O operation
+is complete
+
+> CPU checks for interrupts after every machine instruction
+
+> When an interrupt occurs, the CPU transfers control to an interrupt handling
+routine
+
+Process Control Block - data structure used by the OS to track processes
+3. Time Sharing
+
+Hardware became cheaper, human labor is valuable
+» Old objective was to maximize CPU time
+» New objective is to give users quick feedback
+> aka minimize response time
+Interactive Time Sharing
+> cheap terminals allow multiple users to use the system
+
+» take resources from an idle user and assign it to a busy user
+Central Server
+
+alr a O™™:
+
+1
+
+Your PC Another PC Another PC Another PC
+
+Figure 3: OS gives users the illusion of having their own computers
+Unix History
+
+AT&T Bell Labs in 1969
+
+Ken Thompson (B, Plan 9, Go}
+Dennis Ritchie (B, C, K&R Book)
+Written in assembly -> C
+
+Turing Award in 1983
+GNU/Linux History
+
+Richard Stallman (GPL) 1983
+Free software userland
+Linus Torvalds (git) 1991
+
+Kernel, drivers, etc
+4. Networking
+
+Personal computers - computers are inexpensive, so give everyone a computer
+Interconnecting different systems
+
+> Network them together
+> Security becomes important (XP/Vista to 7 transition)
+
+What does this all mean for the OS? Operating systems become more sophisticated
+
+Notice: as improve resource use, complexity grows
+OS Services
+
+C -> Assembly -> Binary
+
+Vv
+
+vvvvvy
+
+Creating/Managing multiple processes
+
+Scheduling /Multiprogramming
+
+Process communication /cooperation (pipes, locks)
+Memory management
+
+Threading (lightweight processes), share data
+Networking and communication (sockets)
+
+Devices: 1O/print, Disks, and Filesystem, etc
+Creating Processes Recap
+
+fork
+
+> creates a duplicate of the calling process
+> returns 0 to the child, and child identifier to the parent
+> returns -1 in case of failure
+
+wait
+
+> invoked by parent
+> parent blocks until one (arbitrary) child terminates
+
+exit
+
+>» terminates the calling process
+pid = 26
+
+Text Data
+
+ret = fork(); ret = 26
+switch(ret)
+{
+case -1:
+printf(“fork error”);
+exit(1);
+
+case 0: //1 am the child
+<code for child >
+exit(0);
+
+default: // 1am parent ...
+<code for parent >
+wait(0);
+
+Figure 4: How fork works
+
+|
+
+PCB
+ret = fork(); ret=0
+switch(ret)
+{
+case -1:
+printf(“fork error”);
+exit(1);
+
+case 0: // | am the child
+<code for child >
+exit(0);
+default: // 1am parent...
+<code for parent >
+wait(0);
+
+Process Execution Environment
+
+Environment variables describe the environment in which a process runs
+P Can be system (global) or user (account-specific)
+When a process begins executing, it receives two arrays of strings:
+
+> Command-line arguments in the main function
+> Environment values in the environ global variable
+
+A process can access environ directly, or can retrieve single environment values using the
+getenv system call
+Text
+
+Data
+BSS
+
+Heap
+
+f
+
+Stack
+
+Command-Line Args
+and
+Environment Variables
+
+Figure 5: Memory Layout of a C Program
+Sample execution (assuming the executable is called xt ree):
+
+bashs
+
+[ID
+[ID
+
+[ID =
+
+[ID
+
+[ID =
+
+-/xtree
+
+100] I am the root parent
+101] My parent is [100]
+102] My parent is [100]
+103] My parent is [102]
+104] My parent is [101]
+
+Figure 6: Creating Processes
+process
+
+process different machines
+
+same machine
+
+Figure 7: Inter-Process Communication: Sockets v Pipes
+Scheduling
+First Come First Served (FCFS):
+
+> Advantage: simple
+> Disadvantage: short jobs may get stuck behind long ones
+
+Shorted Job/Time to Completion First (SJF, STCF):
+
+> Advantage: optimal
+» Disadvantage: hard to predict the future
+> (SJF) unfair to long-running processes
+
+Round Robin (RR):
+
+» Advantage: better response time, better for short processes
+> Disadvantage: poor when processes are the same length
+
+Every system uses a combination of these!
+
+>» Lottery Scheduling
+>» Priority Scheduling
+Memory Management
+
+Relocation
+
+> Compiler generates virtual addresses
+> Compute physical addresses at runtime
+
+Protection
+> Check for valid addresses at runtime
+Paging
+
+> Load virtual pages into memory frames (non-contiguous)
+> Address translation done in hardware using page tables
+Virtual Memory
+
+Virtual memory can be larger than physical memory
+
+>» Bring pages in memory as needed
+» Use disk swap area for pages not in memory
+
+Fetch policy
+
+» Demand: bring page in memory only when needed
+» Prepaging: bring extra pages in on page fault
+
+Replacement policy
+
+>» FIFO: replace oldest page
+> LRU: replace page least recently referenced
+
+Resident Set Policy
+
+> Adjust page allocation based on fault rate
+Page Address
+Stream
+
+2 2 1 5 2 4 5 3 2 5
+24 2 2 24 2 2 2 3 3 3
+3 3 5 5 5 5 5 5 5
+1 1 1 4 4 4 2 2
+
+F F F F
+
+Figure 8: Least Recently Used
+
+Process
+
+Heap
+
+Data
+
+Thread
+
+Registers
+
+Stack
+
+Process
+
+Heap
+
+Data
+
+Thread Thread Thread
+Registers Registers Registers
+Stack Stack Stack
+
+Figure 9: Single v Multi-Thread Processes
+
+Synchronization (via Semaphores)
+
+Threads
+
+» Efficient, own stack, share global data
+Problem with Threads
+
+m Race conditions when accessing shared data
+Eliminating Races
+
+> Mutual Exclusion with Semaphores
+Thread Synchronization
+
+» Semaphores can be used to synchronize threads
+POSIX
+
+>» Standard-based thread API for C and C++
+Other Non-Linux OSes
+
+BSD - Unix developed by UC Berkeley
+Darwin/MacOS
+Solaris - Unix developed by Sun Microsystems
+Android
+DOS/NT /Windows
+
+Pm ReactOS
+RedoxOS
+
+> modern micro-kernel
+> Rust based
+
+Haiku/BeOS
+Plan 9
+OS Family Tree
+
+https: //eylenburg.github.io/os_familytree.htm
+Linux Family Tree
+
+https: //distrowatch.com/dwres.php?resource=family-tree
+References
+
+Operating Systems: Three Easy Pieces (OSTEP)
+Dive Into Systems
+
+Linux From Scratch (LFS)
+
+CSC 2405 by Mirela Damian at Villanova University
+OS Family Tree
+
+Linux Family Tree
+
+Major Linux Distributions
+
+Repology
+The Great Presidential Distro Debate of 2025
+
+Opening Statements/Arguments (3-5m each)
+P slides and/or oral and/or interpretative dance
+Moderated Discussion and Cross Examination (~30m)
+> including moderator questions
+Final Ranked Choice Vote (5m)
+
+Lets install!
+Topics to Consider
+Maintenance / Management / Upgrading
+
+Stability
+
+Available Software
+Performance
+
+Hardware compatibility
+Documentation /Support
+
+Technologies used e.g. Wayland, systemD - kernel version (LTS vs. bleeding-edge) and
+containerization (Docker, Podman) (DeepSeek)
+
+Open/Community v Commercial Backing
+Intended role
+What seems interesting/what do you want to learn?
+
+Look at shared Mission Statement document
+Topics to Consider (DeepSeek 1/3)
+
+Security
+
+> Built-in security features (SELinux, AppArmor, firewalls).
+> Patch responsiveness for vulnerabilities.
+
+Networking Stack
+
+> Support for low-latency/high-throughput networking (e.g., InfiniBand, RDMA).
+> Kernel optimizations for cluster communication (e.g., tuned kernels).
+
+Cluster-Specific Tools
+
+> Native support for orchestration (Kubernetes, Slurm, OpenHPC).
+> Parallel computing libraries (MPI, OpenMP) and HPC packages.
+Topics to Consider (DeepSeek 2/3)
+
+Scalability
+
+> Handling node additions/removals seamlessly.
+P Distributed filesystem support (Lustre, Ceph, GlusterFS).
+
+Automation & Provisioning
+
+» Compatibility with tools like Ansible, Terraform, or Puppet.
+> Network booting (PXE) and diskless node support.
+
+Monitoring & Logging
+
+>» Integration with tools like Prometheus, Grafana, or ELK Stack.
+> Resource usage tracking and alerting capabilities.
+Topics to Consider (DeepSeek 3/3)
+
+Power Management
+> Features for energy efficiency (CPU throttling, wake-on-LAN).
+Disaster Recovery
+
+> Backup/restore workflows for node configurations.
+» Snapshot support for critical systems.
+
+Customizability
+
+> Ability to create minimal installations (reduce overhead).
+> Kernel customization (e.g., real-time patches).
+Teams
+
+1. Team RPM: Glenvelis, Ronin
+
+Distros: Fedora, openSUSE, Alma, Rocky, CentOS, RHEL, Oracle, etc
+Team DEB: Maggie, Ashley
+
+Distros: Debian, Ubuntu, Pelican, Qlustar, etc
+
+Team Immutable: Sydney, Sarah
+
+Distros: Fedora Silverblue, openSUSE MicroOS, Ubuntu Core, etc
+Team “The Rest”: Michelle, Molly, Tajhini
+
+vFves v¥y.,r ¥
+
+Distros: FreeBSD, Alpine, Mandrakes, Arch, Slackware, Gentoo, Void, OpenBSD,
+etc
+
+a
+
+Team Declarative: Ashby, Mary
+» Distros: NixOS, Guix

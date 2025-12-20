@@ -1,0 +1,235 @@
+CS 352 Seminar: Parallel Programming
+21: Graphics Processing Units (GPUs)
+
+Prof. Michael Robson
+
+11/19/2025
+Announcements
+
+Cluster Standardization ongoing
+HW 7
+> Due 11/21
+HW 8
+Pm Due 12/5?
+Final Projects Assigned - continue working
+
+> Don't forget SC’ 25 videos!
+Outline
+
+Final Project Organization
+Cluster Standardization ongoing
+Graphics Processing Units (GPUs)
+HW 7
+Final Project
+Split into 3 groups of 4 and picked an SC '25 pair:
+
+Pair Benchmark Application
+
+1 MLPerf Exascale Climate Emulator
+2 HPL-MxP — Structural Simulation Toolkit
+3 HPL Reproducibility Challenge
+
+Get running, tune, and design report on results.
+
+Present work on last day of class 12/10 - 15-20 minutes per group
+Final report due last day of finals 12/19
+
+Groups
+
+1. Ronin, Glenvelis, Sarah, Bintu
+2. Sydney, Molly, Maggie, Ashley
+3. Mary, Ashby, Tajhini, Michelle
+Final Proj. Timeline/Check in
+
+1. Initial numbers
+
+> (11/14) Benchmark running
+> (11/21) App running
+
+2. (12/5) Optimize cluster
+» compilers, flags, build process, software, hardware, libraries, etc
+3. (12/10) Present current results
+4. (12/11-12/18) Write final repot draft
+5. (12/19) Turn in final report
+Cluster Standardization
+
+Done
+
+Task
+
+KCTS
+
+Unattended upgrades
+
+NFS mounts
+
+/etc/hosts
+
+Set up multiple users
+
+Set up Spack systemwide
+Install head/worker package(s)
+
+Do we want a module system?
+HW 7
+
+Due Date: 11/21
+
+Q. Read GPU Paper and submit a short reflection and/or notes
+
+1. Complete in-class vectorization example with demonstrated speedups, include your
+code, vectorization report, and a graph or table of performance
+
+2. Discussion reflection from Kubernetes/SLURM/Flux debate and vote
+
+3. Submit a Budget Proposal for $850 to improve the cluster (optional but required in
+HW 07}
+
+4. Debian vote of no/confidence
+Graphics Processing Units (GPUs)
+Top 500 Accelerated Systems Count (June 2024)
+
+200
+
+150
+
+PEZY-SC
+
+: 1 |
+100 : |
+
+|| U NVIDIA
+
+SYSTEMS
+
+50
+
+Clearspeed CSX600 Cell
+2006 «62007 «2008 )«=62009 )9= 2010 2011-02012) 201320142015 = 2016 92017) 2018 92019 2020 2021) 2022-2023 ‘24
+
+Background and History
+
+>» Original purpose: high-speed rendering, i.e. video games
+> Optimized for massively parallel calculations (e.g. matrix multiply)
+
+> Throughput processor: 1000s (10ks) of concurrent threads to hide latency
+>» versus large fast caches in CPUs
+
+> Result: High memory bandwidth (TBs) and many (hundreds) (simple) cores
+CPU v GPU Comparison
+
+CPU (Host) GPU (Device)
+
+Latency Optimized Throughput Optimized
+10s of Cores 1000s of “Cores”
+
+10s of Threads 10000s of Threads
+Performance via: Performance via:
+
+Fast mem./large cache Massive reg. parallelism
+
+Accelerated Supers, June 2024 Top500 Peak Total
+
+By Accelerator Type Systems Share Teraflops Share Cores Share
+AMD MI200 ll 5.7% 2,499,680 26.5% 12,757,568 25.3%
+AMD MIB00 3 1.6% 96,294 10% 387,072 0.8%
+Intel GPU Max 4 2.1% 2,067,806 22.0% 9,613,760 19.0%
+Nvidia Al00 83 43.0% 1,462,714 15.5% 9,754,044 19.3%
+Nvidia H100 29 15.0% 2,379,548 25.3% 6,599,000 13.1%
+Nvidia Other 60 31.1% 899.135 9.5% 10.994.436 21.8%
+Other 3 16% 12,870 0.1% 360,120 0.7%
+Total 193 9,417,847 50,466,000
+
+All Supers 500 12,499,181 114,650,780
+Accelerator Share 38.6% 75.3% 44.0%
+
+CPU-Only Share 6l.4% 24.7% 56.0%
+
+Programmability
+
+» Brook Streaming Language
+» CUDA: Compute Unified Device Architecture
+
+>» API to expose GPUs to general purpose computing (GPGPUs)
+> Many others:
+
+> OpenCL, ROCm, Intel (various), Futhark
+
+> OpenMP, Kokkos, Raja, PyTorch, Tensorflow
+
+» CUDA Libraries i.e. cuBLAS, cuFFT
+SIMT - Single Instruction Multiple Threads
+SIMT Programming Model (Abstraction)
+
+| Control | Control ] Control Control
+Unit Unit Unit Unit
+(au) (a) Caw) Caw
+
+Thread 0 Thread 1 Thread 2 Thread 3
+SIMT Execution wisolet _
+
+> ‘cae
+
+Thread 0 Thread 1 Thread 2 Thread 3
+
+What is CUDA? (C/C++)
+
+> Small set of extensions to enable heterogenous programming
+>» Straightforward APUs to manage devices, memory, etc
+Heterogenous Computing
+
+>» Host - the CPU and its memory
+» Device - the GPU and its memory
+GPU Memory
+
+» Separate
+> Fast
+> Types
+>» Registers
+> Shared/Cache
+» Global
+>» Texture, Read Only, etc
+oa= a
+Programming Model Overview
+
+CPU Thread
+
+FRAP | "FL... .] Ld
+
+GPU Threads
+
+GPU Thread
+Simple C(UDA) Program
+
+#include <stdio.h>
+
+void hello() {
+printf("Hello, world!\n") ;
+}
+
+int maint) {
+hello QO;
+}
+
+gcc hello.c ./a.out
+Simple CUDA Program
+
+#include <stdio.h>
+
+__global__ void hello() {
+printf("Hello, world!\n") ;
+}
+
+int maint) {
+helle<<<i,1>>>0;
+}
+
+nvec hello.cu ./a.out
+Hands-on
+
+https: //developer.nvidia.com/blog/even-easier-introduction-cuda/
+HW 8
+
+1. Continue the Even Easier Intro. to CUDA blog post
+2. Install GPUs?
+Questions?

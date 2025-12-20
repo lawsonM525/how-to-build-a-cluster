@@ -1,0 +1,202 @@
+CS 352 Seminar: Parallel Programming
+
+13: Software Optimizations and Libraries
+
+Prof. Michael Robson
+
+10/29/2025
+oa= a
+CS Listening Session
+
+Thursday 2:30-4:00pm
+October 30th Ford 340
+
+Share input, ideas, concerns, or questions
+about our curriculum, culture, and more. alwpitee Select
+
+Outline
+
+Lab Hands-on
+Common HPC Libraries
+
+>» BLAS
+> LaPack
+> FFTW
+
+Final Project
+
+HW 6
+Lab Hands-on
+
+Basic set up
+
+» ssh
+» sudo
+> what else?
+Common HPC Libraries
+
+> High-performance computing (HPC) relies on efficient software to leverage
+hardware capabilities
+> Optimized libraries abstract common (and complex) operations
+» Enable faster development without sacrificing performance
+> Examples:
+>» BLAS (Basic Linear Algebra Subprograms)
+>» LAPACK (Linear Algebra Package)
+>» FFTW (the Fastest Fourier Transform in the West)
+BLAS (Basic Linear Algebra Subprograms)
+
+» BLAS provides optimized routines for matrix-vector and matrix-matrix operations
+> Key benefits:
+
+>» Vendor-specific optimizations (Intel MKL, AMD BLIS, NVIDIA cuBLAS)
+
+> Utilizes low-level hardware features
+Levels of BLAS Operations
+
+BLAS is divided into three levels of operations:
+1. Level 1 - Vector operations (e.g., dot product, scaling, vector addition)
+2. Level 2 - Matrix-vector multiplication (e.g., GEMV: General Matrix-Vector)
+3. Level 3 - Matrix-matrix multiplication (e.g., GEMM: General Matrix-Multiplication)
+Lab: Using BLAS in Practice
+
+Common application: optimized matrix multiplication (matmul)
+Use blas libraries (open, MKL)
+
+Compare runtime of naive vs optimized
+
+Code snippets in ~/matrix/
+
+Note: compilation lines
+
+vvvvyv
+Some Available BLAS implementations:
+
+Intel Math Kernel Library (MKL)
+
+GotoBLAS (hand-written)
+
+OpenBLAS (based on Goto)
+
+AMD BLIS
+
+NVIDIA cuBLAS (GPUs)
+
+ATLAS (Automatically Tuned Linear Algebra Software)
+Accelerate (Apple)
+
+GNU Scientific Library (GSL) (incl.s others)
+
+many others
+
+vvvvvvvyvyy
+LAPACK for Advanced Linear Algebra
+
+> Built on top of BLAS for more advanced operations
+» Includes routines for:
+>» Solving systems of equations
+» Eigenvalue problems
+> Singular Value Decomposition (SVD)
+>» Example: Solve the linear system Ax = B using LAPACK dgesv
+» A matrix, B vector
+» d- double precision
+» ge - general matrix
+» sv - solve
+
+> Also ScaLAPACK (scalable)
+the Fastest Fourier Transform in the West (FFTW)
+
+> Fast Fourier Transform (FFT) common HPC kernel
+
+> Translates signals (data) from frequency to time domain (or back)
+
+>» FFTW is a highly optimized library for computing FFTs
+
+» Widely used in fields like signal processing, image analysis, and scientific simulations
+
+Example: Computing a 1D FFT with FFTW
+
+fftw_plan p = fftw_plan_dft_1d(N, input, output, FFTW_FORWARD,
+FFTW_ESTIMATE) ;
+
+fftw_execute(p) ;
+
+fftw_destroy_plan(p) ;
+Other Example Libraries
+
+P Portable, Extensible Toolkit for Scientific Computation (PETSc)
+» Focused on solving linear and nonlinear equations and optimization problems
+» Frequently used in large-scale simulations and scientific computations
+> Trilinos
+» Framework for scientific computations, solving PDEs, optimization, and
+preconditioning
+> Offers tools for managing parallel simulations
+> Thrust: STL-like library for parallel programming on GPUs
+> Hierarchical Data Format 5 (HDF5 ):
+» Efficient handling and storage of large datasets
+> Often used for input/output in HPC simulations
+> METIS/ParMETIS:
+> Libraries for graph partitioning and sparse matrix ordering
+>» Frequently used in scientific computations related to networks or finite element
+methods
+» Armadillo: C++ linear algebra library focusing on user-friendly syntax and
+performance
+Resources
+
+» BLAS Reference Guide
+> Intel MKL Documentation
+» Optimized LAPACK implementation
+Final Project
+
+Split into 3 groups of 4 and pick an SC '25 pair:
+
+Pair Benchmark Application
+
+1 MLPerf Exascale Climate Emulator
+2 HPL-MxP — Structural Simulation Toolkit
+3 HPL Reproducibility Challenge
+
+Get running, tune, and design report on results. Present work in class after Thanksgiving
+HW 6
+
+. Submit a short (one paragraph to two page) written reflection on the process of
+
+setting up the shared infrastructure using Ansible etc. Be sure to include: what
+went well, what could have been improved, and what you learned. Please also
+mention how the team component went and how this assignment could be
+improved in the future.
+
+. Mid Semester Assessment: Complete the linked Google Form on how is the course
+
+going so far, what you like/want to see more of, what could change to improve this
+time and in the future, etc.
+
+. Implement a naive library routine and measure it's performance relative to an
+
+optimzied library implementation, e.g. BLAS (MKL), LAPACK, FFTW, etc. You
+can use an LLM to generate the naive implementation but make sure it's a basic
+implementation without any software optimizations. Before running both versions,
+do a simple runtime analysis of the naive implementation to try and estimate the
+runtime based on the number of operations and your original FLOPs calculations
+(or updated value from HPL etc). Then time (using previous slides on timers) both
+versions and see how much faster the optimized version is.
+HW 6 (cont.)
+
+4. Research Report on whether we should install SLURM or Kubernetes on the cluster
+(or some other scheduler technology)
+
+5. Read posted paper on algorithmic optimizations in HPC. and submit insights.
+6. Attempt one of the Ansible tutorials linked on the CS 352 Wiki
+
+7. (HW7?) Budget Proposal: How would you spend $850 to improve the cluster?
+Some ideas:
+
+> additional nodes
+
+> new node types:
+> Single Board Computers (SBC) e.g. Raspberry Pi,
+>» ARM Systems e.g. MacMini, cost/watt
+
+> additional RAM
+
+> purchasing GPU(s)
+Questions?

@@ -1,0 +1,192 @@
+CS 352 Seminar: Parallel Programming
+08: Benchmarks and Profiling
+
+Prof. Michael Robson
+
+10/01/2025
+Announcements
+
+HW 4
+> Due Tuesday 10/7 Freday4t0 at 11:59 PM
+
+> Extension form on Moodle
+Wednesday (10/8): Infrastructure Discussion (in class}
+Student/Office/Drop-in Hours
+
+> Tuesday 11:30 - 12:30 in Bass 110
+> Friday 3-08—4-00 3:30 - 4:30 in Bass 210/211
+> By Appointment: Schedule Link
+
+monster.ddns.smith up and running!
+Outline
+
+Benchmarks
+Profiling
+MPI hands-on
+
+Infrastructure Day Preview
+Mission Statement
+
+Posted!
+Common HPC Benchmarks
+
+Top 500 (HPL) https://top500.org/
+
+> Green 500 - FLOPs/Watt
+Pm HPCG
+
+Graph 500 https://graph500.org/
+Links to Common HPC Benchmark Suites
+
+High Performance Conjugate Gradients (HPCG)
+NASA Parallel Benchmarks (NPB)
+
+HPC Challenge (HPC)
+
+Intel Parallel Research Kernels (PRK}
+
+Mantevo
+Rodinia
+SPEC
+Chai
+SHOC
+Parboil
+PARSEC
+PolyBench
+BOTS
+Proxy Apps
+
+ECP Proxy App Suite + App Catalog - https://proxyapps.exascaleproject.org /
+“mini” apps that mimic core part(s) of a larger applications’ behavior
+
+Useful for evaluating new approahces (e.g. programming languages) and systems -
+without having to write/port thousands of lines of code
+SC '25 Student Cluster Competition
+
+https: //sc25.supercomputing.org/students/student-cluster-competition /
+Benchmarks
+
+1. High-Performance Linpack (HPL) e.g. Top500
+2. HPL Mixed Precision (HPL-MxP)
+3. MLPerf
+
+Applications
+
+1. Exascale Climate Emulator - instead of PDEs
+2. Structural Simulation Toolkit (SST) - PDES
+3. Reproducibility Challenge
+Performance Analysis
+Measuring Performance
+
+Measuring and evaluating performance is a whole lecture
+> Caching, other processes, warm-up, etc
+
+Know that there are a variety of tools:
+> Libraries, Timers, Profilers, Counters, HW/SW, Etc
+
+We will just look at a simple/good enough example today
+Timers
+
+A basic tool that is often very useful is (just) a timer
+Multiple types of timers are available
+
+b> Make sure you use one with low overhead and high resolution
+
+» Beware difference between clock ticks and time: dynamic variation due to turbo
+boost and DVFS
+
+» Check overhead and resolution of timers by calling them repeatedly in a loop
+
+Caveats
+
+> Precision/Accuracy
+> Overflow
+
+> Monotonicity
+
+> Portability
+Different Timers
+Language Specific
+
+> C: clock(}
+> C11: timespec_get()
+em CH++411:
+
+» chrono::high_resolution_clock
+>» boost::timer
+
+Machine Specific
+
+> x86: rdtsc
+> ARM: cent
+
+OS Specific
+m POSIX (Linux/Unix):
+
+» clock_gettime()
+» vettimeofday()
+Hands On: Timing Timers
+
+Definition of a timer based on gettimeofday
+
+double get_clock() {
+struct timeval tv; int ok;
+ok = gettimeofday(&tv, (void *) 0);
+if (ok < 0) { printf("gettimeofday error"); }
+return (tv.tv_sec * 1.0 + tv.tv_usec * 1.0E-6);
+
+}
+
+tO = get_clock();
+
+for (int i = 0; i < N; i++) times[i] = get_clock();
+
+ti = get_clock();
+
+printf("time per call: %f ns\n", (1000000000.0*(t1-t0)/N));
+
+Try clock_gettime, std::chrono, etc (rdtsc, clock)
+gcc Compiler Options
+
+https: //gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html
+
+> -O0 — (default) match debugging (Og), fast compilation
+
+-O1 — turn on optimizations (longer compilation, more memory)
+-O2 - optimize even more (except space/speed tradeoff)
+
+-O3 - go fast!
+
+-Ofast — go faster! disables standards compliance (accuracy issues)
+-Og — optimize for debugging
+
+-Os — optimize for size (not speed)
+
+-Oz — go small! (O2 but for size)
+
+vvvvvvyy
+Demo: MPI
+10/8 Infrastructure Day:
+
+>» How to manage updates?
+
+» How to manage shared infrastructure
+
+> bash/shell scripts
+
+> Nix/Guix
+
+>» Ansible(/chef/puppet)
+» others
+
+> Network/Distributed File Systems: Alternatives? Should we stick with NFS?
+
+>» lustre
+ceph
+BeeGFS
+hadoop
+gluster?
+sshfs?
+etc
+
+vvvvvyy

@@ -1,0 +1,198 @@
+CS 352 Seminar: Parallel Programming
+
+Prof. Michael Robson
+
+2024-06-18
+Introductions
+
+Name and Pronouns
+Other Majors/Minors/Programs
+Hobby and/or Favorite Media
+Motivating Idea
+>» 25 PROGRAM EXHIBITS STUDENTS SCINET MEDIA ATTEND Q
+
+Home > Students@SC > Student Cluster Competition
+
+Student Cluster Competition
+
+With sponsorship from hardware and software vendor partners,
+competing student teams design and build small clusters, learn
+scientific applications, and apply optimization techniques for their
+chosen architectures in a non-stop, 48-hour challenge.
+
+48-HOUR HPC-A-PALOOZA
+
+Student Cluster Competition Schedule
+Monday-Wednesday, November 17-19, 2025
+
+Student Cluster Competition Chair
+Le Mai Weakley, Indiana University
+
+Student Cluster Competition Vice Chair
+Abhinav Theta, Indiana University
+
+Figure 1: Student Cluster Competition
+SC: Student Cluster Competition
+
+Webpage: https://sc25.supercomputing.org/students/student-
+cluster-competition /
+
+Long Term Goal: Course/Team
+Course Overview
+
+vvvvvvyy
+
+Schedule
+
+Course Structure
+Un-grading
+
+Al Policy
+Extension Policy
+Other Policies
+First Assignment
+Schedule
+
+Week Topic
+
+0 Introduction and Planning
+Fundamentals
+
+1 Computer Architecture
+
+2 Operating Systems
+
+3 Networking
+
+Parallel Programming
+4
+
+5
+
+6
+
+Optimizations
+
+7
+
+8
+
+9
+
+Advanced Topics
+10
+
+11
+
+Final Praiact
+
+Benchmarking
+Profiling
+Message Passing Interface
+
+Software and Libraries
+Algorithms
+Hardware
+
+Schedulers
+Graphics Processing Units
+Course Structure
+
+Vv
+
+Lectures
+In-class hands-on exercises
+> Programming
+» Hardware assembly
+Homework assignments
+Participation
+Readings (will be provided)
+> Research Articles
+>» Textbooks
+>» Blog Posts
+» etc
+Opinion Polls
+Final (Group) Project and Presentation
+Un-grading
+
+Your final grade in this course will be decided by you, in
+conversation with me, based on:
+
+> your own goals for yourself this semester
+
+> growth and learning you achieved over the course of the
+semester
+
+completion of assignments
+
+effort you made on those assignments
+
+attendance and preparedness for class (readings etc.)
+effort put into providing feedback to your peers
+feedback on your work from your instructors and peers
+throughout the semester
+
+self-reflection at various points during the course
+
+» engagement in the learning community of our class
+
+vvvvyv
+
+Vv
+
+Meet a few (~3) times to discuss with some critical reflection before.
+Can adjust grade (usually up).
+Al Policy
+
+Ideas
+
+> Ban it entirely
+
+>» Only use course GPT
+> Attributions
+
+» Go wild
+
+> Others?
+
+Thoughts?
+Extension Policy
+
+Currently: automatic 3-day (72 hour) extension if requested via
+Google Form before deadline.
+
+Feedback?
+Other Policies
+
+Accessibility & Accomodations
+Respect, Inclusion, & Equity
+Attendance
+
+Communication
+
+> Student Hours: Bass 110
+
+> Slack (preferred): @mrobson
+> Email: mrobson@smith.edu
+
+> Campus phone (413) 585-6599
+First Assignment
+
+1. Fill out background survey:
+https: //forms.gle/mYPWWVMkHYXXHcmx8
+
+2. Record name pronunciation:
+https: //wd5.myworkday.com/smithcollege/d/inst/25755$639/ rel-
+task/2998$40834.htmld
+
+3. Review the SCC website:
+https: //sc25.supercomputing.org/students/student-cluster-
+competition /
+
+4. Cluster Mission Statement
+
+> Brainstrom
+> Write thoughts
+» Collect (Friday?) and make cohesive vision
+Questions?
+Lab Tour!

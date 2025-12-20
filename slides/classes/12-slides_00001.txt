@@ -1,0 +1,308 @@
+CS 352 Seminar: Parallel Programming
+12: Profiling and MPI
+
+Prof. Michael Robson
+
+10/15/2025
+Announcements
+
+HW 5
+Pm Due 10/17 at 11:59 PM
+No office hours Friday 10/17
+No class Friday 10/17 or Wednesday 10/22
+Outline
+
+Profiling
+MPI + hands-on
+
+Run benchmarks in lab
+Measuring Performance
+
+Measuring and evaluating performance is a whole lecture
+> Caching, other processes, warm-up, etc
+
+Know that there are a variety of tools:
+> Libraries, Timers, Profilers, Counters, HW/SW, Etc
+
+We will just look at a simple/good enough example today
+Timers
+
+A basic tool that is often very useful is (just) a timer
+Multiple types of timers are available
+
+b> Make sure you use one with low overhead and high resolution
+
+» Beware difference between clock ticks and time: dynamic variation due to turbo
+boost and DVFS
+
+» Check overhead and resolution of timers by calling them repeatedly in a loop
+
+Caveats
+
+> Precision/Accuracy
+> Overflow
+
+> Monotonicity
+
+> Portability
+Different Timers
+
+Language Specific
+> C: clock()
+> C11: timespec_get()}
+> C4411:
+> chrono::high_resolution_clock
+>» boost::timer
+
+Machine Specific
+> x86: rdtsc
+>» ARM: cent
+
+OS Specific
+m POSIX (Linux/Unix):
+P clock_gettime()
+» gettimeofday()
+
+>» Mac: mach_absolute_time()}
+> Windows: (via ChatGPT)
+QueryPerformanceCounter(}
+Hands On: Timing Timers
+
+Definition of a timer based on gettimeofday
+
+double get_clock() {
+struct timeval tv; int ok;
+ok = gettimeofday(&tv, (void *) 0);
+if (ok < 0) { printf("gettimeofday error"); }
+return (tv.tv_sec * 1.0 + tv.tv_usec * 1.0E-6);
+
+}
+
+tO = get_clock();
+
+for (int i = 0; i < N; i++) times[i] = get_clock();
+
+ti = get_clock();
+
+printf("time per call: %f ns\n", (1000000000.0*(t1-t0)/N));
+
+Try clock_gettime, std::chrono, etc (rdtsc, clock)
+Reminder: Shared Memory Systems
+
+eee @
+
+Memory
+
+» Advantages: Easy to parallelize, all data available nearby
+> Limitations: Complex and expensive to build, restricted to certain sizes
+Reminder: Disrtibuted Memory Systems
+
+Mem0O Mem1
+
+Others
+
+Others
+
+Mem2
+
+Others
+s
+
+MemN
+
+Others
+
+NETWORK
+
+» Locality of data is exposed, cheap to build
+
+» What are the negatives?
+
+Message Passing Interface (MPI)
+
+Work unit: Processes (not threads)
+
+Data unuts:
+
+> Decomposed so that each process has own chunk
+» No shared data
+
+> Coordination using “messages” via send/recv calls
+> Think postal mail
+Message Passing
+
+copy
+
+X
+
+»
+
+|
+
+receive
+
+— |
+
+|
+
+MPI History
+
+Historically:
+
+> nxlib (Intel hypercubs)
+
+> ncube variants
+
+>» PVM
+
+> Each vendor (Cray, IBM, etc) had their own variant
+
+MPI standard:
+
+» Vendors, ISVs, academics, national labs, etc got together
+> Intent: standardize current practice
+
+> Popularity due to wide vendor support
+
+> Large standard (support for types, tags, etc)
+Simple Subset of MPI
+
+These six functions allow you to write many programs:
+
+> MPI Init
+
+MPI Finalize
+MPI _Comm_size
+MPI_Comm_rank
+MPI Send
+
+MPI _Recv
+
+vvvvyv
+MPI Init and Finalize
+
+MPI_Init(int argc, char** argv)
+
+P initializes the MPI library
+> analgous to int main(int argc, char* argv[])
+
+MPI_Finalize()
+» terminates use of the MPI library
+
+All MPI calls must occur between these two (temporally)
+MPI Process Identification
+
+MPI_Comm_size(comm, &size)
+
+> determines the total number of processes
+MPI_Comm_rank(comm, &pid)
+
+P pid is the process identifier (or rank) of the caller
+
+comm here is an MPI communicator, usually the default global MPI_COMM_WORLD
+Simple MPI Example Program
+
+#include "mpi.h"
+#include <stdio.h>
+
+int main(int arge, char *argv[]) ¢{
+int rank, size;
+MPI_Init(&’arge, &argv) ;
+MPI_Comm_rank(MPI_COMM WORLD, &rank) ;
+MPI Comm _size(MPI_COMM WORLD, &size);
+printf("Hello world! I'm %d of %d\n", rank, size);
+MPI_Finalize();
+return 0;
+
+}
+
+mpicc hello.c -o hello mpiexec -np 2 ./hello
+MPI Send
+
+MPI_Send(void* buf, int count, datatype, int dest, int tag, comm)
+
+> buf - location of data to send
+
+count - number of elements in send buffer (non-negative integer)
+datatype - data type of send buffer elements
+
+dest - rank (id) of destination process
+
+tag - used in message matching
+
+vvvvyv
+
+comm - communicator (ignore for now)
+
+man MPI Send
+
+buf
+
+count
+= __ MN
+“ ™
+
+“~
+Size of (datatype)
+MPI Recv
+
+MPI_Recv(void *buf, int count, datatype, int source, int tag, comm,
+status)
+
+> buf - location to store recieved data
+
+count - number of elements in receive buffer (non-negative integer)
+datatype - data type of recieve buffer elements
+
+source - rank (id) of source process or MPI_LANY_SOURCE
+
+tag - used in message matching or MPI_LANY_TAG
+
+comm - communicator (ignore for now)
+
+status - status object
+
+vvvvvy
+MPI Collectives
+
+Message passing is often, but not always, used for SPMD style programming
+
+» all processors execute essentially the same program, and same steps, but not in
+lockstep
+
+All communication is almost in lockstep
+Collective Calls:
+
+P reduction (e.g. max or sum)
+> broadcast
+
+> all-to-all
+
+> scatter/gather
+Lab Time
+
+vvvvvy
+
+/etc/hosts
+
+Set up Network File System
+mothra username
+
+GitHub usernames
+
+Ansible
+
+auto-updates
+HW 5
+
+vvegyvyéeyYv
+
+Run benchmark vs FLOPs
+Basic MPI app/test (Pi?)
+Reading: MPI Paper
+Install Infra:
+
+» /etc/hosts
+>» NFS
+
+> other tools

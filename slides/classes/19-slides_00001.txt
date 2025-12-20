@@ -1,0 +1,257 @@
+CS 352 Seminar: Parallel Programming
+19: Cluster Schedulers
+
+Prof. Michael Robson
+
+11/12/2025
+Announcements
+
+Cluster Standardization ongoing
+HW 6 (past due)
+
+Pm Due 11/11 at 11:59 PM
+HW 6.5
+
+Pm Due 11/14 at 11:59 PM
+
+Final Projects Assigned - start working now
+Outline
+
+Final Project Organization
+Scheduler Discussion
+
+HW 6.5
+Final Project
+Split into 3 groups of 4 and picked an SC '25 pair:
+
+Pair Benchmark Application
+
+1 MLPerf Exascale Climate Emulator
+2 HPL-MxP — Structural Simulation Toolkit
+3 HPL Reproducibility Challenge
+
+Get running, tune, and design report on results.
+
+Present work on last day of class 12/10 - 15-20 minutes per group
+Final report due last day of finals 12/19
+
+Groups
+
+1. Ronin, Glenvelis, Sarah, Bintu
+2. Sydney, Molly, Maggie, Ashley
+3. Mary, Ashby, Tajhini, Michelle
+Final Proj. Timeline/Check in
+
+1. Initial numbers
+
+> (11/14) Benchmark running
+> (11/21) App running
+
+2. (12/5) Optimize cluster
+» compilers, flags, build process, software, hardware, libraries, etc
+3. (12/10) Present current results
+4. (12/11-12/18) Write final repot draft
+5. (12/19) Turn in final report
+Cluster Schedulers
+
+Vv
+
+Multi (thousands+-) user enviroment
+Desire to use fraction of resources
+>» X CPUs
+>» Y RAM
+>» Z GPUs
+
+Not dis-similar to OS schedulers
+How to assign?
+How to make fair?
+
+Vv
+
+vvv
+Common Schedulers
+
+vvvvvyy
+
+SLURM
+
+Kubrenetes
+
+PBS
+
+HT Condor
+
+Flux
+
+IBM LSF (commercial)
+SLURM (Simple Linux Utility for Resource Management)
+
+Traditional HPC scheduler
+Open source
+Well documented
+de facto at HPC sites
+» academic (Unity, grid)
+> Natl. Labs
+» SC centers
+
+Utilizes bash scripts
+Advanced features: arrays/dependencies
+
+vvvyv
+
+vv
+SLURM Code
+#!/bin/bash
+#SBATCH -J run-deepseek # job name
+#SBATCH -N 1 # num. nodes
+#SBATCH -c 32 # Number of Cores per Task
+#SBATCH --mem=500G # Requested Memory
+#SBATCH -t 00:15:00 # Job time limit
+#SBATCH -o slturm-Zj.out # 47 = gpt2
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=mrobson@smith. edu
+#SBATCH -p gpu-preempt # Submit job to to gpu-preempt partition
+#SBATCH --gpus=1 # Request access to 1 GPU
+#SBATCH --constraint=vram80
+
+# Echo commands to stdout
+set -x
+
+# Example commands <>
+Kurbernetes (K8s)
+
+>» Conatainer orchestration
+
+» Open source
+
+> Well documented
+
+> MPI add-on required + latency overhead
+> Industry standard
+K8s Example (via ChatGPT-5)
+
+apiVersion: batch/vl
+kind: Job
+metadata:
+name: pi-indexed
+spec:
+completions: 8
+parallelism: 4
+completionMode: Indexed
+template:
+spec:
+restartPolicy: Never
+containers:
+- name: task
+image: python:3.11-slim
+command: ["bash","-lc","echo Index=$JOB_COMPLETION_INDEX; python -
+
+a
+PBS and Grid
+
+> Similar to SLURM
+
+> Tools exisit to convert scripts between
+» Has commercial backing for support
+> Less popular alternatives
+HT Condor
+
+> Focused on high-throughput jobs
+» Any guesses what that means?
+
+» Good at ‘scavenging’ resources
+» Workflow focused
+Flux (via ChatGPT-5)
+
+> LLNL next-gen scheduler
+
+> Hierarchical/composable with flexible resource model
+>» Supports nesting and user-level schedulers
+
+> Good for complex workflows
+> Newer ecosystem (fewer tutorials and more learning curve)
+Open Discussion and Vote
+Thoughts
+
+» Do we even need a scheduler?
+» Part of budget could go towards cloud ‘bursts’
+> Apptainer/Singularity for containerization
+Scheduler Policies
+
+Vv
+
+Queues?
+Priority?
+» Big over small?
+>» Long over short?
+Per-user/group/etc
+Pre-emption?
+Overlap resources?
+Interactive jobs?
+
+Vv
+
+vvvyv
+ChatGPT5 Considerations
+
+vvvvvvvyvyy
+
+ease of setup on old desktops
+MPI support
+
+job arrays
+
+backfilling
+
+fair-share
+
+preemption
+
+container integration
+community/support
+
+licensing
+Lab Time
+
+Let's (try) setting up a scheduler
+Quick Start Pointers (Debian 13) via ChatGPT-5
+
+>» SLURM:
+> Controller + compute nodes; configure slurm.conf (NodeName, PartitionName).
+>» Enable cgroups and backfill; set accounting if you want fair-share.
+> MPI:
+> Install OpenMPI or MPICH on all nodes; test with hello_mpi and srun.
+> Networking:
+> Ensure consistent hostnames, time sync (chrony), passwordless SSH for admin, shared
+home or NFS for job I/O (careful with NFS hotspots).
+> Containers:
+>» Apptainer integrates well with SLURM for HPC workflows; no root daemon required.
+HW 6
+
+1. Submit a short reflection on setting up the shared infrastructure using Ansible etc.
+2. Submit a research report on SLURM v Kubernetes v other schedulers.
+
+3. Attempt one of the Ansible tutorials on the CS 352 Wiki and submit your notes.
+HW 6.5
+
+Q. Complete the linked Mid Semester Assessment Google Form. (not posted yet)
+
+1. Implement a naive library routine and measure it’s performance relative to an
+optimized library implementation.
+
+2. Read the posted paper on algorithmic optimizations in HPC and submit your notes.
+
+3. Submit a Budget Proposal for $850 to improve the cluster (optional but required in
+HW 07}
+Questions?
+References and Further Reading (via ChatGPT)
+
+> SLURM documentation: https://slurm.schedmd.com/documentation.html
+> Kubernetes docs (Jobs):
+https: //kubernetes.io/docs/concepts/workloads/controllers/job/
+> HTCondor: https://htcondor.org and docs: https://htcondor.readthedocs.io/
+> OpenPBS: https://openpbs.org and docs: https://openpbs.atlassian.net /wiki/
+> Grid Engine (Altair Grid Engine product page):
+https: //www.altair.com/grid-engine/
+> IBM Platform LSF: https: //www.ibm.com/products/spectrum-Isf
+> Flux framework: https: //flux-framework.org

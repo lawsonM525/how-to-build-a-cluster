@@ -1,0 +1,82 @@
+CS 352 Seminar: Parallel Programming
+
+17: Hardware Optimizations
+
+Prof. Michael Robson
+
+10/29/2025
+Announcements
+
+Cluster Standardization tomorrow?
+HW 6
+
+Pm Due 11/11 at 11:59 PM
+HW 6.5
+
+Pm Due 11/14 at 11:59 PM
+
+Final Projects Assigned
+Outline
+
+Final Project Organization
+Hardware Optimizations
+
+> Vectorization
+> Caches
+
+HW 6
+Final Project
+Split into 3 groups of 4 and picked an SC '25 pair:
+
+Pair Benchmark Application
+
+1 MLPerf Exascale Climate Emulator
+2 HPL-MxP — Structural Simulation Toolkit
+3 HPL Reproducibility Challenge
+
+Get running, tune, and design report on results.
+
+Present work on last day of class 12/10 - 15-20 minutes per group
+Final report due last day of finals 12/19
+
+Groups
+
+1. Ronin, Glenvelis, Sarah, Bintu
+2. Sydney, Molly, Maggie, Ashley
+3. Mary, Ashby, Tajhini, Michelle
+Cluster Standards Discussion
+oa= a
+Cache Blocking
+Hands-on
+Other Techniques
+
+>» Memory hierarchy awareness/minimizing memory access
+
+> Cache obliviousness
+
+> Auto-tuning (e.g. ATLAS)
+
+> Other hand-written asssembly
+
+> Thread affinity and NUMA (Non-Uniform Memory Access) optimizations
+oa= a
+Resources
+
+Pm AVX512 Programming Guide
+HW 6
+
+. Submit a short reflection on setting up the shared infrastructure using Ansible etc.
+. Complete the linked Mid Semester Assessment Google Form. (not posted yet)
+. Submit a research report on SLURM v Kubernetes v other schedulers.
+
+. Attempt one of the Ansible tutorials on the CS 352 Wiki and submit your notes.
+HW 6.5
+
+1. Implement a naive library routine and measure it’s performance relative to an
+optimized library implementation.
+
+2. Read the posted paper on algorithmic optimizations in HPC and submit your notes.
+
+3. Submit a Budget Proposal for $850 to improve the cluster (optional but required in
+HW 07}
+Questions?

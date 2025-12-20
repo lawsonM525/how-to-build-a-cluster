@@ -1,0 +1,65 @@
+Version Control with Git
+
+
+
+
+
+
+
+Summary and Setup
+
+Jimmy and Alfredo have been hired by Ratatouille restaurant (a special restaurant from Euphoric State University) to investigate if it is possible to make the best recipes archive ever. They want to be able to work on indexing the prices at the same time, but they have run into problems doing this in the past. If they take turns, each one will spend a lot of time waiting for the other to ?nish, but if they work on their own copies and email changes back and forth things will be lost, overwritten, or duplicated.
+A colleague suggests using version control to manage their work. Version control is better than mailing ?les back and forth:
+Nothing that is committed to version control is ever lost, unless you work really, really hard at losing it. Since all old versions of ?les are saved, it's always possible to go back in time to see exactly who wrote what on a particular day, or what version of a program was used to generate a particular set of results.
+As we have this record of who made what changes when, we know who to ask if we have questions later on, and, if needed, revert to a previous version, much like the "undo" feature in an editor.
+When several people collaborate in the same project, it's possible to accidentally overlook or overwrite someone's changes. The version control system automatically noti?es users whenever there's a con?ict between one person's work and another's.
+Teams are not the only ones to bene?t from version control: lone researchers can bene?t immensely. Keeping a record of what was changed, when, and why is extremely useful for all researchers if they ever need to come back to the project later on (e.g., a year later, when memory has faded).
+Version control is the lab notebook of the digital world: it's what professionals use to keep track of what they've done and to collaborate with other people. Every large software development project relies on it, and most programmers use it for their small jobs as well. And it isn't just for
+
+software: books, papers, small data sets, and anything that changes over time or needs to be shared can and should be stored in a version control system.
+
+
+
+
+
+
+
+Installing Git
+
+Since several Carpentries lessons rely on Git, please see this section of the workshop template for instructions on installing Git for various operating systems.
+Git installation on Windows Git installation on MacOS Git installation on Linux
+
+
+
+
+Creating a GitHub Account
+
+You will need an account for GitHub to follow episodes 7 & 8 in this lesson.
+
+1. Go to https://github.com and follow the "Sign up" link at the top-right of the window.
+2. Follow the instructions to create an account.
+3. Verify your email address with GitHub.
+4. Con?gure multifactor authentication (see below).
+
+Multi-factor Authentication
+In 2023, GitHub introduced a requirement for all accounts to have multi-factor authentication (2FA) con?gured for extra security. Several options exist for setting up 2FA, which are summarised here:
+1. If you already use an authenticator app, like Google Authenticator or Duo Mobile on your smartphone for example, add GitHub to that app.
+2. If you have access to a smartphone but do not already use an authenticator app, install one and add GitHub to the app.
+3. If you do not have access to a smartphone or do not want to install an authenticator app, you have two options:
+1. set up 2FA via text message (list of countries where authentication by SMS is supported), or
+2. use a hardware security key like YubiKey or the Google Titan key.
+
+The GitHub documentation provides more details about con?guring 2FA.
+
+
+
+
+
+Preparing Your Working Directory
+
+We'll do our work in the Desktop folder so make sure you change your working directory to it with:
+
+
+
+
+

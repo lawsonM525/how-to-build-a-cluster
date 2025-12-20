@@ -12,7 +12,7 @@ const Intro = () => {
           Chapter 1: Intro to Cluster Computing
         </h1>
         <p className="text-xl text-primary/80 leading-relaxed">
-          Welcome to the world of High Performance Computing (HPC). 
+          Welcome to the world of High Performance Computing (HPC)!! 
           Let's break down what a cluster is, where it came from, and how it works.
         </p>
       </div>
@@ -23,53 +23,182 @@ const Intro = () => {
         
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="space-y-4">
-            <p>
-              A <strong>computer cluster</strong> is simply a set of loosely or tightly connected computers that work together 
-              so that, in many respects, they can be viewed as a single system.
+            <p className="text-xl text-primary/80 leading-relaxed">
+              At some point, even the fastest single computer becomes too slow, too small, or too expensive.
+              High Performance Computing exists because we kept hitting that wall.
             </p>
             <p>
-              The goal is <strong>High Performance Computing (HPC)</strong>: aggregating computing power to solve 
-              problems that are too large for a standard computer.
+              A <strong>computer cluster</strong> is what happens when we stop trying to build one bigger computer
+              and instead connect many smaller ones to work together.
+            </p>
+            <p>
+              Once computers are connected this way, we unlock <strong>High Performance Computing (HPC)</strong>.
+              HPC is not a single machine — it’s a strategy. It uses many compute resources together 
+              (cpus, gpus, memory, networks, and power) to solve problems that are too big for a single machine.
             </p>
           </div>
           
           {/* Cluster Animation */}
-          <div className="bg-bg-secondary/30 p-8 rounded-lg flex justify-center items-center h-48">
-            <div className="relative">
+          <div className="bg-bg-secondary/30 rounded-xl overflow-hidden relative h-96 w-full mb-8 border border-primary/10">
+            {/* Background Grid */}
+            <div className="absolute inset-0 opacity-[0.03]" 
+                 style={{ 
+                    backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)', 
+                    backgroundSize: '24px 24px' 
+                 }} 
+            />
+
+            {/* SVG Connecting Lines */}
+            <svg className="absolute inset-0 w-full h-full pointer-events-none">
+              <defs>
+                <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                  <path d="M0,0 L10,5 L0,10" fill="currentColor" className="text-primary/30" />
+                </marker>
+              </defs>
+              {[20, 50, 80].map((x, i) => (
+                <g key={i}>
+                  <line 
+                    x1="50%" y1="20%" 
+                    x2={`${x}%`} y2="80%" 
+                    className="text-primary/20" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeDasharray="4 4"
+                  />
+                </g>
+              ))}
+            </svg>
+
+            {/* Head Node (Master) */}
+            <div className="absolute top-[20%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col items-center gap-2">
               <motion.div 
-                className="absolute inset-0 flex items-center justify-center"
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
+                className="bg-bg-primary p-4 rounded-xl border-2 border-primary shadow-[0_0_30px_rgba(var(--primary),0.2)]"
+                animate={{ 
+                  boxShadow: ["0 0 30px rgba(var(--primary),0.2)", "0 0 50px rgba(var(--primary),0.4)", "0 0 30px rgba(var(--primary),0.2)"],
+                  scale: [1, 1.02, 1]
+                }}
+                transition={{ duration: 3, repeat: Infinity }}
               >
-                <div className="w-32 h-32 bg-primary/5 rounded-full" />
+                <Server size={40} className="text-primary" />
               </motion.div>
-              <div className="grid grid-cols-2 gap-4 relative z-10">
-                {[1, 2, 3, 4].map((i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: i * 0.1 }}
-                    className="bg-bg-primary p-2 rounded shadow-sm"
-                  >
-                    <Server size={20} className="text-primary" />
-                  </motion.div>
-                ))}
+              <div className="bg-bg-primary/90 px-3 py-1 rounded border border-primary/30 text-xs font-mono text-primary font-bold backdrop-blur-sm">
+                HEAD NODE
               </div>
+            </div>
+
+            {/* Compute Nodes (Workers) */}
+            {[20, 50, 80].map((x, i) => (
+              <div 
+                key={i}
+                className="absolute bottom-[20%] -translate-x-1/2 translate-y-1/2 z-10 flex flex-col items-center gap-2"
+                style={{ left: `${x}%` }}
+              >
+                <div className="relative">
+                    {/* Processing Indicator */}
+                    <motion.div 
+                        className="absolute -top-3 -right-3 w-4 h-4 bg-yellow-400 rounded-full flex items-center justify-center border-2 border-bg-primary z-20"
+                        initial={{ scale: 0 }}
+                        animate={{ scale: [0, 1, 1, 0] }}
+                        transition={{ 
+                            duration: 2, 
+                            repeat: Infinity, 
+                            delay: i * 0.8 + 1, // Sync with packet arrival
+                            times: [0, 0.1, 0.8, 1]
+                        }}
+                    >
+                        <div className="w-1.5 h-1.5 bg-black rounded-full animate-spin" />
+                    </motion.div>
+
+                    <motion.div 
+                      className="bg-bg-primary p-3 rounded-lg border border-primary/40 shadow-lg"
+                      animate={{ y: [0, -5, 0] }}
+                      transition={{ duration: 4, repeat: Infinity, delay: i }}
+                    >
+                      <Server size={28} className="text-primary/80" />
+                    </motion.div>
+                </div>
+                <div className="bg-bg-primary/90 px-2 py-0.5 rounded border border-primary/20 text-[10px] font-mono text-primary/70 backdrop-blur-sm">
+                  NODE 0{i + 1}
+                </div>
+              </div>
+            ))}
+
+            {/* Data Packets Animation */}
+            {[20, 50, 80].map((x, i) => (
+                <div key={`packets-${i}`}>
+                    {/* Request Packet (Head -> Node) */}
+                    <motion.div
+                        className="absolute w-3 h-3 bg-primary rounded-sm shadow-[0_0_10px_rgba(var(--primary),1)] z-20"
+                        initial={{ top: '20%', left: '50%', opacity: 0, scale: 0 }}
+                        animate={{
+                            top: ['20%', '80%'],
+                            left: ['50%', `${x}%`],
+                            opacity: [1, 1, 0], // Disappear on arrival
+                            scale: [1, 1, 0.5]
+                        }}
+                        transition={{
+                            duration: 1,
+                            repeat: Infinity,
+                            delay: i * 0.8,
+                            repeatDelay: 1, // Wait for return trip
+                            ease: "easeInOut"
+                        }}
+                    />
+
+                    {/* Result Packet (Node -> Head) */}
+                    <motion.div
+                        className="absolute w-2 h-2 bg-green-400 rounded-full shadow-[0_0_10px_rgba(74,222,128,0.8)] z-20"
+                        initial={{ top: '80%', left: `${x}%`, opacity: 0 }}
+                        animate={{
+                            top: ['80%', '20%'],
+                            left: [`${x}%`, '50%'],
+                            opacity: [0, 1, 0], // Appear on depart, fade on arrival
+                        }}
+                        transition={{
+                            duration: 1,
+                            repeat: Infinity,
+                            delay: i * 0.8 + 1, // Start after processing
+                            repeatDelay: 1,
+                            ease: "easeInOut"
+                        }}
+                    />
+                </div>
+            ))}
+
+            {/* Labels */}
+            <div className="absolute top-4 left-4 font-mono text-xs text-primary/40 leading-relaxed">
+                <p>{'>'} init_cluster_comms</p>
+                <p>{'>'} dispatching_jobs...</p>
+                <p>{'>'} aggregating_results</p>
             </div>
           </div>
         </div>
 
         <div className="space-y-4 mt-6">
-          <h3 className="text-lg font-bold">The "Beowulf" Concept</h3>
+          <h3 className="text-lg font-bold">The Beowulf Insight</h3>
           <p>
-            The most common type of cluster for home labs and research is a <strong>Beowulf cluster</strong>. 
-            It's built from commodity hardware (ordinary PCs) and runs open-source software (usually Linux).
-            No custom supercomputer chips required.
+            Researchers realized they didn’t need exotic supercomputers.
+            They could take ordinary machines, connect them with a fast network,
+            and let software do the coordination.
+          </p>
+          <p className="text-sm text-primary/80">
+            This is the origin of the <strong>Beowulf cluster</strong>: built from commodity hardware (ordinary PCs) and running open-source software (usually Linux).
+            No custom chips required.
           </p>
 
-          <h3 className="text-lg font-bold">Flynn’s Taxonomy</h3>
-          <p>How do computers handle data? Michael Flynn categorized them in 1966:</p>
+          <Note type="info" title="Mental Model">
+            <p>
+              Think of a cluster as a factory: the <strong>head node</strong> is management, 
+              <strong>compute nodes</strong> are workers, the <strong>network</strong> is the hallway, 
+              and <strong>memory</strong> is never shared unless messages are sent.
+            </p>
+          </Note>
+
+          <h3 className="text-lg font-bold pt-4">Flynn’s Taxonomy</h3>
+          <p>
+            Once we connect computers, the next question becomes:
+            <em>how do instructions and data flow through the system?</em>
+          </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="p-4 rounded bg-bg-secondary/10">
               <div className="font-mono font-bold mb-2">SISD</div>
@@ -87,6 +216,10 @@ const Intro = () => {
               <div className="text-xs text-primary/60 mt-1">Clusters! Different nodes doing different things.</div>
             </div>
           </div>
+          <p className="text-sm text-primary/80 mt-4">
+            Clusters fall under <strong>MIMD</strong>, which means every node can run different code
+            on different data at the same time — powerful, but harder to coordinate.
+          </p>
         </div>
       </section>
 
@@ -106,8 +239,8 @@ const Intro = () => {
             <em>"The number of transistors on a microchip doubles about every two years."</em>
           </p>
           <p className="text-sm text-primary/80">
-            This observation drove single-core performance for decades. But as physics limits hit, 
-            we transitioned to <strong>multi-core</strong> and <strong>distributed systems</strong> to keep scaling up.
+            Moore’s Law worked until heat, power, and physics got in the way.
+            When faster single cores stopped scaling, parallelism became the only path forward.
           </p>
           <div className="mt-4">
             <a 
@@ -135,6 +268,11 @@ const Intro = () => {
       {/* 1.3 Architecture */}
       <section className="space-y-6">
         <h2 className="text-2xl font-bold text-primary pb-2">1.3 Architectural Models</h2>
+        
+        <p>
+          Once we accept distributed systems, a new problem appears:
+          <strong>how do processors see and share memory?</strong>
+        </p>
 
         <div className="grid md:grid-cols-2 gap-6">
           <div className="space-y-2">
@@ -174,6 +312,10 @@ const Intro = () => {
 
         <h3 className="text-lg font-bold mt-8">Cluster Topology</h3>
         <p>
+          Because nodes don’t share memory and communicate over a network,
+          clusters need a clear structure for control, scheduling, and access.
+        </p>
+        <p className="mt-2">
             We will use the classic <strong>Master/Slave</strong> (or Head Node/Compute Node) topology.
         </p>
         <ul className="list-disc list-inside space-y-2">

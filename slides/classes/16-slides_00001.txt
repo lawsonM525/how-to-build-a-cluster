@@ -1,0 +1,193 @@
+CS 352 Seminar: Parallel Programming
+16: Algorithmic Optimizations: Scan and MatMul
+
+Prof. Michael Robson
+
+10/31/2025
+Announcements
+
+HW 6/6.5
+Student/Office/Drop-in Hours
+
+> Tuesday 11:30 - 12:30 in Bass 110
+> Friday 3-69—4-00 3:30 - 4:30 in Bass 210/211
+> By Appointment: Schedule Link
+
+monster.ddns.smith.edu up and running!
+Outline
+
+Final Project Organization
+HPC Algorithms
+
+> Cannons MatMul
+> Parallel Prefix/Scan
+> Space/Time Tradeoffs
+
+HW 6
+Final Project
+
+Split into 3 groups of 4 and pick an SC '25 pair:
+
+Pair Benchmark Application
+
+1 MLPerf Exascale Climate Emulator
+2 HPL-MxP — Structural Simulation Toolkit
+3 HPL Reproducibility Challenge
+
+Get running, tune, and design report on results.
+Present work on last day of class 12/10 - 15-20 minutes per group
+Final report due last day of finals 12/19
+
+Let's form teams now!
+Matrix Multiplication: Fox's Algorithm
+
+pptx slides
+Matrix Multiplication: Cannon's Algorithm
+
+Overview
+» Cannon's Algorithm is an efficient parallel method for distributing matrix
+multiplication across processors
+> It minimizes communication overhead by structuring communication and
+computation to reduce inter-node dependencies
+P Provides O(N*3 / P) computational complexity for P processors with N x N
+matrices
+
+Key Concept
+
+» The algorithm spatially decomposes matrices A and B into blocks for
+computation
+
+> Each processor calculates a partial matrix product, communicates intermediate
+results, and iterates through a fixed communication pattern
+Partitioning Matrices: Cannon's Algorithm
+
+1. Input matrices A and B are divided into P blocks, one per processor
+» Assumes P processors organized in a 2D sqrt{P} x sqrt{P} grid
+2. Each processor is given a sub-block Ali,j] and B[i,j]
+> For example, in a 4x4 grid (16 processors), A and B are divided into 4x4 submatrices
+Visualization
+
+> Matrix A Partition:
+
+POO PO1 PO2 P03
+P04 POS PO6 POT
+PO8 PO9 P10 Pil
+P12 P13 P14 P15
+
+> Matrix B Partition:
+
+PO P4 PO8 P12
+Pi P&S POO P13
+P2 P6 P10 P14
+P3 P7 Pil P15
+Cannon's Algorithm: Step-by-Step Execution
+
+1. Initial Alignment: Shift matrix blocks, as described, based on processor position.
+2. Computation:
+» Each processor computes a partial product on its assigned block.
+> Example for processor P{i,j]
+Cli,j] t= Ali,j] * BLi,j]
+3. Communication:
+> Blocks Ali,j] are cyclically shifted left within each row.
+> Blocks B[i,j] are cyclically shifted up within each column.
+4. Repeat:
+> Perform sqrt{P} iterations of computation and block shifts.
+>» Final result C = A x B computed using contributions of all blocks.
+oa= a
+Cannon's Algorithm: (Partial) Parallel Implementation (Python + mpi4py)
+
+import numpy as np
+from mpi4py import MPI
+
+def cannon_multiply(A, B, C, size, sqrtP, comm):
+rank = comm.Get_rank()
+shift_matrices(A, B, rank, sqrtP)
+
+for step in range(sqrtP):
+# Compute on tocal blocks
+C += np.dot(A, B)
+
+# Perform block shifts
+shift_left(A, sqrtP, comm)
+shift_up(B, sqrtP, comm)
+Run Cannon's Algorithm (cont.)
+
+comm MPI.COMM_WORLD
+
+rank = comm.Get_rank()
+
+size = 1000
+
+sqrtP = int(np.sqrt(comm.Get_size(Q))
+
+A = np.random.rand(size // sqrtP, size // sqrtP)
+B = np.random.rand(size // sqrtP, size // sqrtP)
+C = np.zeros_like(A)
+
+cannon_multiply(A, B, C, size, sqrtP, comm)
+Parallel Prefix/Scan
+
+pptx slides
+oa= a
+HW 6
+
+. Submit a short (one paragraph to two page) written reflection on the process of
+
+setting up the shared infrastructure using Ansible etc. Be sure to include: what
+went well, what could have been improved, and what you learned. Please also
+mention how the team component went and how this assignment could be
+improved in the future.
+
+. Mid Semester Assessment: Complete the linked Google Form on how is the course
+
+going so far, what you like/want to see more of, what could change to improve this
+time and in the future, etc.
+
+. Implement a naive library routine and measure it's performance relative to an
+
+optimzied library implementation, e.g. BLAS (MKL), LAPACK, FFTW, etc. You
+can use an LLM to generate the naive implementation but make sure it's a basic
+implementation without any software optimizations. Before running both versions,
+do a simple runtime analysis of the naive implementation to try and estimate the
+runtime based on the number of operations and your original FLOPs calculations
+(or updated value from HPL etc). Then time (using previous slides on timers) both
+versions and see how much faster the optimized version is.
+HW 6 (cont.)
+
+4. Research Report on whether we should install SLURM or Kubernetes on the cluster
+(or some other scheduler technology)
+
+5. Read posted paper on algorithmic optimizations in HPC. and submit insights.
+6. Attempt one of the Ansible tutorials linked on the CS 352 Wiki
+
+7. (HW7?) Budget Proposal: How would you spend $850 to improve the cluster?
+Some ideas:
+
+> additional nodes
+
+> new node types:
+> Single Board Computers (SBC) e.g. Raspberry Pi,
+>» ARM Systems e.g. MacMini, cost/watt
+
+> additional RAM
+
+> purchasing GPU(s)
+Questions?
+
+=" a _
+
+i4
+
+Da
+Sy
+
+> —
+
+i a
+
+f , ANY. QUESTIONS: a ‘ne Nw
+h * e®
+\ R
+
+rr
+
