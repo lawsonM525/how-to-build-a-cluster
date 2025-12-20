@@ -7,7 +7,7 @@ const Benchmarking = () => {
     <div className="space-y-12 w-full">
       <div className="space-y-4">
         <h1 className="text-4xl font-bold text-primary tracking-tight">
-          Chapter 11: Benchmarking
+          Chapter 12: Benchmarking
         </h1>
         <p className="text-xl text-primary/80 leading-relaxed">
           How do we know if the cluster is fast? We race it.
@@ -15,7 +15,7 @@ const Benchmarking = () => {
       </div>
 
       <section className="space-y-6">
-        <h2 className="text-2xl font-bold text-primary border-b border-border pb-2">11.1 Measuring Performance</h2>
+        <h2 className="text-2xl font-bold text-primary border-b border-border pb-2">12.1 Measuring Performance</h2>
         
         <div className="bg-bg-secondary/20 p-6 rounded border border-border">
             <h3 className="font-bold mb-2">Theoretical Peak FLOPS</h3>

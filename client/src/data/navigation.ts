@@ -50,7 +50,8 @@ export const navigation = [
     icon: Box,
     chapters: [
       { title: "Ch 9: Parallel Frameworks", path: "/apps/mpi" },
-      { title: "Ch 10: Optimization", path: "/apps/optimization" }
+      { title: "Ch 10: GPU Programming", path: "/apps/gpu" },
+      { title: "Ch 11: Optimization", path: "/apps/optimization" }
     ]
   },
   {
@@ -58,8 +59,8 @@ export const navigation = [
     path: "/perf-sec",
     icon: Shield,
     chapters: [
-      { title: "Ch 11: Benchmarking", path: "/perf-sec/benchmarking" },
-      { title: "Ch 12: Security", path: "/perf-sec/security" }
+      { title: "Ch 12: Benchmarking", path: "/perf-sec/benchmarking" },
+      { title: "Ch 13: Security", path: "/perf-sec/security" }
     ]
   },
   {

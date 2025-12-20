@@ -38,7 +38,7 @@ const Home = () => {
         </h1>
         <div className="space-y-2">
           <p className="text-2xl text-primary/80 font-light">
-            Author: <span className="font-semibold text-primary">Michelle Lawson, Prof. Michael Robson</span>
+            Author: <span className="font-semibold text-primary">Michelle Lawson</span>
           </p>
           <p className="text-sm text-primary/60 italic">
             Content adapted from the CSC 251 course by <a href="https://mprobson.github.io" target="_blank" rel="noopener noreferrer" className="hover:text-primary hover:underline">Prof. Michael Robson</a>

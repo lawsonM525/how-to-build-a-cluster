@@ -6,7 +6,7 @@ const Optimization = () => {
     <div className="space-y-12 w-full">
       <div className="space-y-4">
         <h1 className="text-4xl font-bold text-primary tracking-tight">
-          Chapter 10: Optimization and Libraries
+          Chapter 11: Optimization and Libraries
         </h1>
         <p className="text-xl text-primary/80 leading-relaxed">
           Writing code is one thing. Writing code that actually uses 100% of your supercomputer is another.
@@ -14,7 +14,7 @@ const Optimization = () => {
       </div>
 
       <section className="space-y-6">
-        <h2 className="text-2xl font-bold text-primary border-b border-border pb-2">10.1 Mathematical Libraries</h2>
+        <h2 className="text-2xl font-bold text-primary border-b border-border pb-2">11.1 Mathematical Libraries</h2>
         <p className="text-primary/80">
             Don't reinvent the wheel. Smart people have spent decades optimizing matrix multiplication. Use their code.
         </p>
@@ -37,7 +37,7 @@ const Optimization = () => {
       </section>
 
       <section className="space-y-6">
-        <h2 className="text-2xl font-bold text-primary border-b border-border pb-2">10.2 Compiler Optimization</h2>
+        <h2 className="text-2xl font-bold text-primary border-b border-border pb-2">11.2 Compiler Optimization</h2>
         
         <div className="space-y-4">
              <h3 className="font-bold flex items-center gap-2"><Code size={20}/> Vectorization (SIMD)</h3>
@@ -60,7 +60,7 @@ const Optimization = () => {
                  </div>
                  <div className="flex items-center justify-between p-3 bg-bg-secondary/10 rounded border border-border">
                     <code className="font-bold">-O3</code>
-                    <span className="text-sm text-primary/60">Aggressive optimization. Enables vectorization.</span>
+                    <span className="text-sm text-primary/60">Aggressive optimization. Enables vectorization. <strong className="text-primary">Use this for benchmarks!</strong></span>
                  </div>
                  <div className="flex items-center justify-between p-3 bg-bg-secondary/10 rounded border border-border">
                     <code className="font-bold">-Ofast</code>
@@ -71,14 +71,14 @@ const Optimization = () => {
         
         <h3 className="font-bold mt-6">Algorithmic Optimization</h3>
         <p className="text-primary/80">
-            A compiler can't fix a bad algorithm. 
-            Example: <strong>Cannon’s Algorithm</strong> for distributed matrix multiplication minimizes communication between nodes.
+            A good compiler can't fix a bad algorithm. This is where algorithmic thinking from your algorithms class comes in. Look through your code to see if it is time efficient and memory efficient.
+            Check out: <strong>Cannon’s Algorithm</strong> for distributed matrix multiplication -- minimizes communication between nodes.
         </p>
       </section>
 
       <div className="flex justify-between mt-12 pt-8 border-t border-border">
-         <Link to="/apps/mpi" className="text-primary/60 hover:text-primary">
-            ← Previous: Parallel Frameworks
+         <Link to="/apps/gpu" className="text-primary/60 hover:text-primary">
+            ← Previous: GPU Programming
          </Link>
          <Link to="/perf-sec/benchmarking" className="font-bold hover:underline decoration-primary/30 underline-offset-4">
             Next: Benchmarking →

@@ -35,38 +35,7 @@ const Resources = () => {
             ))}
         </div>
       </section>
-
-      <section className="space-y-6">
-        <h2 className="text-2xl font-bold text-primary border-b border-border pb-2">Troubleshooting</h2>
-        <div className="space-y-4">
-            <h3 className="font-bold flex items-center gap-2"><HelpCircle size={18}/> Common Issues</h3>
-            <ul className="list-disc list-inside space-y-2 text-primary/80">
-                <li><strong>Split Brain:</strong> When nodes lose contact and both think they are the master.</li>
-                <li><strong>Node Eviction:</strong> When the scheduler kicks a node out because it stopped responding (usually network or RAM issues).</li>
-                <li><strong>Permission Denied:</strong> Almost always User ID (UID) mismatches between nodes.</li>
-            </ul>
-        </div>
-      </section>
-
-      <section className="space-y-6">
-        <h2 className="text-2xl font-bold text-primary border-b border-border pb-2">Resources</h2>
-        <div className="space-y-4">
-            <h3 className="font-bold flex items-center gap-2"><Book size={18}/> Papers & References</h3>
-            <ul className="list-disc list-inside space-y-1 text-primary/80 text-sm">
-                <li>Michael Robson's CSC 251 Resources (https://mprobson.github.io)</li>
-                <li>The Beowulf Cluster HOWTO</li>
-                <li>Moore's Law Original Paper (1965)</li>
-            </ul>
-
-             <h3 className="font-bold flex items-center gap-2 mt-6"><Globe size={18}/> Communities</h3>
-            <ul className="list-disc list-inside space-y-1 text-primary/80 text-sm">
-                <li>r/HPC and r/homelab on Reddit</li>
-                <li>ServeTheHome Forums</li>
-                <li>Level1Techs</li>
-            </ul>
-        </div>
-      </section>
-
+ 
       <div className="flex justify-between mt-12 pt-8 border-t border-border">
          <Link to="/perf-sec/security" className="text-primary/60 hover:text-primary">
             ← Previous: Security

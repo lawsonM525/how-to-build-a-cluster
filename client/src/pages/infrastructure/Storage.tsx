@@ -10,7 +10,7 @@ const SharedStorage = () => {
           Chapter 5: Shared Storage
         </h1>
         <p className="text-xl text-primary/80 leading-relaxed">
-          A cluster isn't very useful if your data is trapped on one node. We need a way to share files across the network.
+          A cluster isn't very useful if your data is trapped on one node. We need a way to share files across the network. Even if you think you don't need this, you probably do.
         </p>
       </div>
 

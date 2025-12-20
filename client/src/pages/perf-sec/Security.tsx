@@ -6,7 +6,7 @@ const Security = () => {
     <div className="space-y-12 w-full">
       <div className="space-y-4">
         <h1 className="text-4xl font-bold text-primary tracking-tight">
-          Chapter 12: Security and Hardening
+          Chapter 13: Security and Hardening
         </h1>
         <p className="text-xl text-primary/80 leading-relaxed">
           High Performance Computing is a target. Compute power is valuable for mining crypto or cracking passwords. Protect your cluster.
@@ -14,7 +14,7 @@ const Security = () => {
       </div>
 
       <section className="space-y-6">
-        <h2 className="text-2xl font-bold text-primary border-b border-border pb-2">12.1 Hardening the Cluster</h2>
+        <h2 className="text-2xl font-bold text-primary border-b border-border pb-2">13.1 Hardening the Cluster</h2>
         
         <div className="grid md:grid-cols-3 gap-6">
             <div className="space-y-2">
@@ -46,7 +46,7 @@ const Security = () => {
       </section>
 
       <section className="space-y-6">
-        <h2 className="text-2xl font-bold text-primary border-b border-border pb-2">12.2 Security Auditing</h2>
+        <h2 className="text-2xl font-bold text-primary border-b border-border pb-2">13.2 Security Auditing</h2>
         <p className="text-primary/80">
             You can't fix what you don't see.
         </p>

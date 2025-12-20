@@ -10,6 +10,7 @@ import UserManagement from './pages/infrastructure/Users';
 import AnsibleSetup from './pages/management/AnsibleSetup';
 import Slurm from './pages/scheduler/Slurm';
 import MPI from './pages/apps/MPI';
+import GPU from './pages/apps/GPU';
 import Optimization from './pages/apps/Optimization';
 import Benchmarking from './pages/perf-sec/Benchmarking';
 import Security from './pages/perf-sec/Security';
@@ -63,6 +64,7 @@ function App() {
           <Route path="apps">
             <Route index element={<Navigate to="/apps/mpi" replace />} />
             <Route path="mpi" element={<MPI />} />
+            <Route path="gpu" element={<GPU />} />
             <Route path="optimization" element={<Optimization />} />
           </Route>
 
