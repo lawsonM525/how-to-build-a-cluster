@@ -1,6 +1,7 @@
-import { Cpu, HardDrive, Network, Zap, Server } from 'lucide-react';
+import { Cpu, HardDrive, Network, Zap, Server, CircuitBoard, Layers } from 'lucide-react';
 import Note from '../../components/Note';
 import { Link } from 'react-router-dom';
+import { CoreVisual } from './DesignHelper';
 
 const Design = () => {
   return (
@@ -25,11 +26,54 @@ const Design = () => {
             <h3 className="text-lg font-bold flex items-center gap-2">
               <Cpu size={20} /> Processor (CPU)
             </h3>
+            <p className="text-sm text-primary/80">
+              The CPU is the brain of the operation. In a cluster, we care about <strong>core density</strong>—how many independent processing units we can pack into a single node.
+            </p>
+            
+            <div className="flex flex-wrap gap-4 py-4 justify-center sm:justify-start">
+               <CoreVisual count={1} label="Single-Core" />
+               <CoreVisual count={2} label="Dual-Core" />
+               <CoreVisual count={4} label="Quad-Core" />
+               <CoreVisual count={8} label="Hybrid (ARM)" type="big-little" />
+               <CoreVisual count={12} label="Many-Core" />
+            </div>
+
             <ul className="list-disc list-inside space-y-1 text-sm text-primary/80">
-              <li><strong>Core Count:</strong> More cores = more parallelism (MIMD).</li>
-              <li><strong>Clock Speed:</strong> Faster individual tasks.</li>
-              <li><strong>Architecture:</strong> x86_64 is standard. ARM (Raspberry Pi) is efficient.</li>
+              <li><strong>Single-core:</strong> Runs one thread at a time. Good for general purpose, bad for HPC.</li>
+              <li><strong>Multi-core:</strong> Handles multiple tasks simultaneously. Essential for parallel processing.</li>
+              <li><strong>Many-core:</strong> 10+ cores. Great for throughput, often found in servers (Xeon/EPYC).</li>
             </ul>
+
+            <h4 className="font-bold text-sm mt-4 mb-2 flex items-center gap-2"><Layers size={16}/> Architectures</h4>
+            <div className="space-y-3 text-sm text-primary/80">
+                <div className="p-3 bg-bg-secondary/5 rounded border border-border/50">
+                    <div className="font-bold text-primary">CISC (x86_64)</div>
+                    <div className="text-xs mb-1 opacity-70">Complex Instruction Set Computer</div>
+                    <div>Dominant in desktop/server (Intel, AMD). Powerful individual instructions, but power-hungry.</div>
+                </div>
+                <div className="p-3 bg-bg-secondary/5 rounded border border-border/50">
+                    <div className="font-bold text-primary">RISC (ARM)</div>
+                    <div className="text-xs mb-1 opacity-70">Reduced Instruction Set Computer</div>
+                    <div>Dominant in mobile/embedded (Apple Silicon, Raspberry Pi). Simpler instructions, highly power-efficient.</div>
+                </div>
+            </div>
+
+            <h4 className="font-bold text-sm mt-4 mb-2 flex items-center gap-2"><CircuitBoard size={16}/> The Big Players</h4>
+            <div className="grid grid-cols-1 gap-2 text-sm">
+                <div className="flex justify-between items-center p-2 rounded bg-bg-secondary/5">
+                    <span className="font-bold">Intel</span>
+                    <span className="text-xs text-primary/60">Core (Consumer), Xeon (Enterprise)</span>
+                </div>
+                <div className="flex justify-between items-center p-2 rounded bg-bg-secondary/5">
+                    <span className="font-bold">AMD</span>
+                    <span className="text-xs text-primary/60">Ryzen (Consumer), EPYC (Enterprise)</span>
+                </div>
+                <div className="flex justify-between items-center p-2 rounded bg-bg-secondary/5">
+                    <span className="font-bold">ARM</span>
+                    <span className="text-xs text-primary/60">Designs licensed to Apple, Qualcomm, Ampere</span>
+                </div>
+            </div>
+
             <Note type="info" title="AI & Simulation?">
                If you are interested in AI or heavy simulations, you might want to consider <Link to="/apps/optimization" className="underline">Accelerators (GPUs)</Link>.
             </Note>

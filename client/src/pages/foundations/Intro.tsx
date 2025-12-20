@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import Note from '../../components/Note';
-import { Server, Cpu, Share2, Lock, Unlock } from 'lucide-react';
+import { Server, Cpu, Share2, Lock, Unlock, Zap, History, Network, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Intro = () => {
@@ -12,29 +12,34 @@ const Intro = () => {
           Chapter 1: Intro to Cluster Computing
         </h1>
         <p className="text-xl text-primary/80 leading-relaxed">
-          Welcome to the world of High Performance Computing (HPC)!! 
-          Let's break down what a cluster is, where it came from, and how it works.
+          Welcome to the world of High Performance Computing (HPC)! 
+         </p>
+        <p className="text-lg text-primary/70 leading-relaxed">
+         Our goal is to understand how multiple computers can work together effeciently as one powerful system, the history behind this technological evolution, and how you can harness this power yourself.
         </p>
       </div>
 
       {/* 1.1 What is a Cluster? */}
       <section className="space-y-6">
-        <h2 className="text-2xl font-bold text-primary pb-2">1.1 What even is a Cluster?</h2>
+        <div className="flex items-center gap-2">
+          <Network className="text-primary" size={24} />
+          <h2 className="text-2xl font-bold text-primary pb-2">1.1 What even is a Cluster?</h2>
+        </div>
         
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="space-y-4">
-            <p className="text-xl text-primary/80 leading-relaxed">
-              At some point, even the fastest single computer becomes too slow, too small, or too expensive.
-              High Performance Computing exists because we kept hitting that wall.
+            <p>
+              Think about how we tackle big projects in everyday life. When faced with cleaning an entire house, a family might divide rooms among themselves. 
+              When building a skyscraper, hundreds of workers specialize in different tasks to get things done, and/or get it done faster. Computing follows the same principle.
             </p>
             <p>
-              A <strong>computer cluster</strong> is what happens when we stop trying to build one bigger computer
-              and instead connect many smaller ones to work together.
+              A <strong>computer cluster</strong> is simply a set of connected computers that work together 
+              to accomplish tasks that would be too large, too slow, or too complex for a single machine.
             </p>
             <p>
-              Once computers are connected this way, we unlock <strong>High Performance Computing (HPC)</strong>.
-              HPC is not a single machine — it’s a strategy. It uses many compute resources together 
-              (cpus, gpus, memory, networks, and power) to solve problems that are too big for a single machine.
+              The goal is <strong>High Performance Computing (HPC)</strong>: using many compute resources together 
+              (cpus, gpus, memory, networks, and power)
+              to solve problems that are too big, too slow, or too complex for a single machine to handle in a reasonable time.
             </p>
           </div>
           
@@ -175,30 +180,27 @@ const Intro = () => {
         </div>
 
         <div className="space-y-4 mt-6">
-          <h3 className="text-lg font-bold">The Beowulf Insight</h3>
-          <p>
-            Researchers realized they didn’t need exotic supercomputers.
-            They could take ordinary machines, connect them with a fast network,
-            and let software do the coordination.
-          </p>
-          <p className="text-sm text-primary/80">
-            This is the origin of the <strong>Beowulf cluster</strong>: built from commodity hardware (ordinary PCs) and running open-source software (usually Linux).
-            No custom chips required.
-          </p>
-
-          <Note type="info" title="Mental Model">
-            <p>
-              Think of a cluster as a factory: the <strong>head node</strong> is management, 
-              <strong>compute nodes</strong> are workers, the <strong>network</strong> is the hallway, 
-              and <strong>memory</strong> is never shared unless messages are sent.
+          <div className="bg-bg-secondary/10 p-4 rounded-lg border-l-4 border-primary/30">
+            <p className="italic text-primary/70">
+              "Individually, we are one drop. Together, we are an ocean." — Ryunosuke Satoro
             </p>
-          </Note>
+            <p className="text-xs mt-2 text-primary/50">
+              This philosophy perfectly captures the essence of cluster computing: many small parts creating something greater than their sum.
+            </p>
+          </div>
 
-          <h3 className="text-lg font-bold pt-4">Flynn’s Taxonomy</h3>
+          <h3 className="text-lg font-bold flex items-center gap-2"><Users size={18} /> The "Beowulf" Concept</h3>
           <p>
-            Once we connect computers, the next question becomes:
-            <em>how do instructions and data flow through the system?</em>
+            The most common type of cluster for home labs and research is a <strong>Beowulf cluster</strong>. 
+            It's built from commodity hardware (ordinary PCs) and runs open-source software (usually Linux).
+            No custom supercomputer chips required.
           </p>
+          <p>
+            This democratization of supercomputing power is what makes our project possible—we can build something powerful without specialized equipment or corporate budgets.
+          </p>
+
+          <h3 className="text-lg font-bold flex items-center gap-2"><Cpu size={18} /> Flynn's Taxonomy</h3>
+          <p>But how exactly do computers work together? In 1966, Michael Flynn created a framework that still helps us understand parallel computing today:</p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="p-4 rounded bg-bg-secondary/10">
               <div className="font-mono font-bold mb-2">SISD</div>
@@ -216,31 +218,41 @@ const Intro = () => {
               <div className="text-xs text-primary/60 mt-1">Clusters! Different nodes doing different things.</div>
             </div>
           </div>
-          <p className="text-sm text-primary/80 mt-4">
-            Clusters fall under <strong>MIMD</strong>, which means every node can run different code
-            on different data at the same time — powerful, but harder to coordinate.
-          </p>
         </div>
       </section>
 
       {/* 1.2 History */}
       <section className="space-y-6">
-        <h2 className="text-2xl font-bold text-primary pb-2">1.2 How did this all start?</h2>
+        <div className="flex items-center gap-2">
+          <History className="text-primary" size={24} />
+          <h2 className="text-2xl font-bold text-primary pb-2">1.2 How did this all start?</h2>
+        </div>
         
         <p>
-          From "human computers" to the first Beowulf cluster at NASA in 1994, the quest has always been for more power.
+          The story of cluster computing is a fascinating journey through human ingenuity and our never-ending quest to solve bigger problems.
+        </p>
+        <p>
+          It begins with "human computers"—rooms full of people performing calculations by hand for scientific and military applications in the early 20th century. As electronic computers emerged, the limitations of single machines quickly became apparent.
+        </p>
+        <p>
+          The watershed moment came in 1994 when NASA built the first Beowulf cluster, connecting 16 off-the-shelf computers with Linux to create an affordable supercomputer. This democratized high-performance computing, proving you didn't need million-dollar budgets to access serious computational power.
         </p>
 
         <div className="bg-bg-secondary/20 p-6 rounded-lg">
           <h3 className="text-lg font-bold flex items-center gap-2 mb-4">
-            <Cpu size={20} /> Moore's Law
+            <Zap size={20} /> Moore's Law & Its Limits
           </h3>
           <p className="mb-4">
             <em>"The number of transistors on a microchip doubles about every two years."</em>
           </p>
           <p className="text-sm text-primary/80">
-            Moore’s Law worked until heat, power, and physics got in the way.
-            When faster single cores stopped scaling, parallelism became the only path forward.
+            For decades, this observation by Intel co-founder Gordon Moore in 1965 drove computing forward. Each new processor generation was significantly faster than the last, solving our need for speed through sheer transistor density.
+          </p>
+          <p className="text-sm text-primary/80 mt-2">
+            But by the early 2000s, we began hitting fundamental physical limits—heat dissipation, quantum effects, and the speed of light itself. The industry's answer? Stop trying to make single processors exponentially faster and instead use <strong>multi-core</strong> and <strong>distributed systems</strong> to keep scaling up.
+          </p>
+          <p className="text-sm text-primary/80 mt-2">
+            This paradigm shift is why cluster computing has moved from niche supercomputing centers to becoming essential technology for any organization dealing with significant data processing needs.
           </p>
           <div className="mt-4">
             <a 
@@ -267,18 +279,22 @@ const Intro = () => {
 
       {/* 1.3 Architecture */}
       <section className="space-y-6">
-        <h2 className="text-2xl font-bold text-primary pb-2">1.3 Architectural Models</h2>
-        
+        <div className="flex items-center gap-2">
+          <Share2 className="text-primary" size={24} />
+          <h2 className="text-2xl font-bold text-primary pb-2">1.3 Architectural Models</h2>
+        </div>
         <p>
-          Once we accept distributed systems, a new problem appears:
-          <strong>how do processors see and share memory?</strong>
+          Now that we understand what clusters are and why they evolved, let's explore <em>how</em> they're designed. The architecture of a cluster determines how its components communicate and share resources—a critical factor in its performance and capabilities.
         </p>
 
         <div className="grid md:grid-cols-2 gap-6">
           <div className="space-y-2">
             <h3 className="font-bold">Shared Memory</h3>
             <p className="text-sm text-primary/80">
-              Multiple processors access the same memory space. Fast, but hard to scale (e.g., a single large server).
+              Think of shared memory systems like a team working from a single whiteboard. Multiple processors access the same memory space—fast communication, but limited by how many can effectively use the board at once.
+            </p>
+            <p className="text-xs text-primary/60 italic">
+              Examples: Multi-processor workstations, high-end servers with many CPU cores.
             </p>
             <div className="h-32 bg-bg-secondary/30 rounded flex items-center justify-center p-4">
               <div className="flex gap-2 items-end">
@@ -292,7 +308,10 @@ const Intro = () => {
           <div className="space-y-2">
             <h3 className="font-bold">Distributed Memory</h3>
             <p className="text-sm text-primary/80">
-              Each processor has its own memory. They communicate via a network (message passing). Scales massively (e.g., a cluster).
+              Distributed memory is like team members working on individual notepads, sending messages when they need to share information. Each processor has its own memory and communicates via a network. This approach scales to thousands of machines.
+            </p>
+            <p className="text-xs text-primary/60 italic">
+              Examples: Beowulf clusters, cloud computing platforms, the cluster we're building in this guide.
             </p>
             <div className="h-32 bg-bg-secondary/30 rounded flex items-center justify-center p-4">
                <div className="flex gap-4 items-center">
@@ -312,30 +331,66 @@ const Intro = () => {
 
         <h3 className="text-lg font-bold mt-8">Cluster Topology</h3>
         <p>
-          Because nodes don’t share memory and communicate over a network,
-          clusters need a clear structure for control, scheduling, and access.
+            For our journey, we'll implement the classic <strong>Master/Slave</strong> (or Head Node/Compute Node) topology—a proven design pattern that balances simplicity with effectiveness.
         </p>
-        <p className="mt-2">
-            We will use the classic <strong>Master/Slave</strong> (or Head Node/Compute Node) topology.
+        <p className="mb-2">
+            This architecture mirrors many real-world organizational structures, where coordination flows from a central authority to specialized workers:
         </p>
         <ul className="list-disc list-inside space-y-2">
-            <li><strong>Head Node (Master):</strong> Manages the cluster, schedules jobs, hosts the filesystem.</li>
-            <li><strong>Compute Nodes (Workers):</strong> Do the heavy lifting (calculations, rendering).</li>
+            <li><strong>Head Node (Master):</strong> Manages the cluster, schedules jobs, hosts the filesystem. Like a project manager, it doesn't do the heavy calculations itself but ensures everything runs smoothly.</li>
+            <li><strong>Compute Nodes (Workers):</strong> Do the heavy lifting (calculations, rendering). These are your specialized workers focused on processing their assigned tasks efficiently.</li>
         </ul>
+        <p className="mt-2 text-sm text-primary/70">
+            This separation of concerns makes the system both easier to manage and more resilient—if a compute node fails, the cluster continues operating with reduced capacity rather than complete failure.
+        </p>
 
         <div className="grid md:grid-cols-2 gap-6 mt-6">
             <div className="p-4 rounded bg-bg-secondary/20">
                 <h4 className="font-bold flex items-center gap-2 mb-2"><Unlock size={16} /> Open Cluster</h4>
                 <p className="text-sm">Nodes are accessible from the outside world. Easier access, harder security.</p>
+                <p className="text-xs text-primary/60 mt-2">Like a university campus where anyone can enter any building directly.</p>
             </div>
             <div className="p-4 rounded bg-bg-secondary/20">
                 <h4 className="font-bold flex items-center gap-2 mb-2"><Lock size={16} /> Closed Cluster</h4>
                 <p className="text-sm">Nodes are hidden behind the head node (acting as a gateway). Standard for HPC.</p>
+                <p className="text-xs text-primary/60 mt-2">Like a secure facility where visitors must check in at reception before being escorted to their destination.</p>
             </div>
         </div>
       </section>
 
-      <div className="flex justify-between mt-12 pt-8">
+      <section className="space-y-6">
+        <div className="flex items-center gap-2">
+          <Zap className="text-primary" size={24} />
+          <h2 className="text-2xl font-bold text-primary pb-2">1.4 Why Build Your Own?</h2>
+        </div>
+        
+        <p>
+          With cloud computing so prevalent, you might wonder why anyone would build a physical cluster today. There are compelling reasons:
+        </p>
+        
+        <div className="grid md:grid-cols-3 gap-4">
+          <div className="p-4 bg-bg-secondary/10 rounded-lg">
+            <h3 className="font-bold mb-2">Learning</h3>
+            <p className="text-sm">Building a cluster teaches you about hardware, networking, distributed systems, and parallel programming—foundational knowledge for any computing career.</p>
+          </div>
+          <div className="p-4 bg-bg-secondary/10 rounded-lg">
+            <h3 className="font-bold mb-2">Cost Control</h3>
+            <p className="text-sm">While cloud has ongoing costs, a home cluster has primarily upfront expenses. For consistent workloads, this can be more economical long-term.</p>
+          </div>
+          <div className="p-4 bg-bg-secondary/10 rounded-lg">
+            <h3 className="font-bold mb-2">Data Sovereignty</h3>
+            <p className="text-sm">Your data stays physically under your control—important for sensitive information or when internet connectivity is unreliable.</p>
+          </div>
+        </div>
+        
+        <Note type="info" title="Real-World Applications">
+          <p>
+            Home clusters aren't just academic exercises. They're used for rendering 3D animations, training machine learning models, hosting game servers, and even contributing to scientific research through distributed computing projects like Folding@home.
+          </p>
+        </Note>
+      </section>
+
+      <div className="flex justify-between mt-12 pt-8 border-t border-primary/10">
          <Link to="/" className="text-primary/60 hover:text-primary">
             ← Home
          </Link>

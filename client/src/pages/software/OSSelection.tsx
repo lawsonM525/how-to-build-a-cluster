@@ -1,4 +1,4 @@
-import { Shield, CheckCircle } from 'lucide-react';
+import { CheckCircle } from 'lucide-react';
 import Note from '../../components/Note';
 import { Link } from 'react-router-dom';
 import periodicTableImg from '../../assets/periodic-table-of-distro.png';
