@@ -12,7 +12,7 @@ const MainLayout = () => {
       
       <main className="flex-1 flex flex-col min-w-0 pb-24"> {/* Added padding bottom for fixed nav */}
         {/* Content Area - Centered Reader Mode */}
-        <div className="flex-1 w-full max-w-3xl mx-auto p-6 md:p-12">
+        <div className="flex-1 w-full max-w-6xl mx-auto p-6 md:p-12">
           <Outlet />
         </div>
       </main>

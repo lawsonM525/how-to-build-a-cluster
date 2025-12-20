@@ -10,7 +10,6 @@ interface NoteProps {
 }
 
 const Note = ({ type = 'info', title, children }: NoteProps) => {
-  // Minimalist mapping: All monochrome, rely on icons/titles for context
   const icons = {
     info: Info,
     warning: AlertTriangle,
@@ -18,14 +17,22 @@ const Note = ({ type = 'info', title, children }: NoteProps) => {
     danger: AlertCircle
   };
 
+  const colors = {
+    info: 'text-base0D',
+    warning: 'text-base0A',
+    success: 'text-base0B',
+    danger: 'text-base09'
+  };
+
   const Icon = icons[type];
+  const colorClass = colors[type];
 
   return (
-    <div className="my-6 p-4 border border-border bg-bg-secondary/30 rounded transition-colors duration-200">
+    <div className={`my-6 p-4 bg-bg-secondary/30 rounded transition-colors duration-200`}>
       <div className="flex items-start gap-4">
-        <Icon className="mt-1 shrink-0 text-primary" size={20} strokeWidth={1.5} />
+        <Icon className={`mt-1 shrink-0 ${colorClass}`} size={20} strokeWidth={1.5} />
         <div className="flex-1">
-          {title && <h4 className="font-bold mb-2 text-primary text-sm uppercase tracking-wide">{title}</h4>}
+          {title && <h4 className={`font-bold mb-2 text-sm uppercase tracking-wide ${colorClass}`}>{title}</h4>}
           <div className="text-primary/80 leading-relaxed text-sm">
             {children}
           </div>

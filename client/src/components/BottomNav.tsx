@@ -1,5 +1,5 @@
 import { useLocation, Link } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, Menu, Sun, Moon } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Menu, Sun, Moon, Home } from 'lucide-react';
 import { navigation } from '../data/navigation';
 import { useTheme } from '../context/ThemeContext';
 
@@ -30,7 +30,7 @@ const BottomNav = ({ onMenuClick }: BottomNavProps) => {
   const next = currentIndex < flatNav.length - 1 ? flatNav[currentIndex + 1] : null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 bg-bg-primary border-t border-border p-4 transition-colors duration-200">
+    <div className="fixed bottom-0 left-0 right-0 z-40 bg-bg-primary p-4 transition-colors duration-200">
       <div className="max-w-3xl mx-auto flex items-center justify-between">
         {prev ? (
           <Link 
@@ -46,9 +46,17 @@ const BottomNav = ({ onMenuClick }: BottomNavProps) => {
         )}
 
         <div className="flex items-center gap-4">
+          <Link 
+            to="/"
+            className="p-3 rounded-full text-primary hover:bg-bg-secondary transition-all"
+            title="Go to Home"
+          >
+            <Home size={20} />
+          </Link>
+
           <button 
             onClick={toggleTheme}
-            className="p-3 rounded-full border border-border text-primary hover:bg-bg-secondary transition-all"
+            className="p-3 rounded-full text-primary hover:bg-bg-secondary transition-all"
             title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
           >
             {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
@@ -56,7 +64,7 @@ const BottomNav = ({ onMenuClick }: BottomNavProps) => {
 
           <button 
             onClick={onMenuClick}
-            className="p-3 rounded-full border border-border text-primary hover:bg-bg-secondary transition-all"
+            className="p-3 rounded-full text-primary hover:bg-bg-secondary transition-all"
             title="Open Menu"
           >
             <Menu size={20} />

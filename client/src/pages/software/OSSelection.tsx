@@ -1,104 +1,86 @@
-import { Download, Power, Terminal } from 'lucide-react';
+import { Shield, CheckCircle } from 'lucide-react';
 import Note from '../../components/Note';
+import { Link } from 'react-router-dom';
 
 const OSSelection = () => {
   return (
-    <div className="space-y-12 max-w-4xl">
-      <div className="space-y-6">
-        <h1 className="text-4xl font-bold text-primary tracking-tight">Operating System Selection</h1>
-        <p className="text-lg text-primary/80 leading-relaxed">
-          Stability is paramount. We choose Debian Stable. 
-          Follow these exact steps. Do not deviate.
+    <div className="space-y-12 w-full">
+      <div className="space-y-4">
+        <h1 className="text-4xl font-bold text-primary tracking-tight">
+          Chapter 3: Operating System Selection
+        </h1>
+        <p className="text-xl text-primary/80 leading-relaxed">
+          The software foundation. While Linux is the obvious choice, *which* Linux matters.
         </p>
       </div>
 
       <section className="space-y-6">
-        <div className="flex items-center gap-3 text-primary border-b border-border pb-2">
-          <Download size={24} strokeWidth={1.5} />
-          <h2 className="text-2xl font-bold m-0 border-0 p-0">3.1 Preparation</h2>
-        </div>
-        <ul className="list-disc list-inside space-y-2 text-primary/80">
-          <li>Verify the node is unconfigured.</li>
-          <li>Transfer Debian Stable to a flash drive.</li>
-          <li>Connect power to the monitor and the node.</li>
-          <li>Connect monitor, keyboard, and flash drive.</li>
-        </ul>
-      </section>
-
-      <section className="space-y-6">
-        <div className="flex items-center gap-3 text-primary border-b border-border pb-2">
-          <Power size={24} strokeWidth={1.5} />
-          <h2 className="text-2xl font-bold m-0 border-0 p-0">3.2 Boot Sequence</h2>
-        </div>
-        <div className="bg-bg-primary border border-border p-6 rounded space-y-4">
-          <h3 className="text-lg font-bold text-primary mt-0">BIOS/UEFI Setup</h3>
-          <ol className="list-decimal list-inside space-y-2 text-primary/80 text-sm">
-            <li>Power on the node.</li>
-            <li>Spam <strong>F12</strong> to enter the boot menu.</li>
-            <li>Select <strong>UEFI BOOT</strong>.</li>
-            <li>Select your flash drive (e.g., UEFI: 8.07).</li>
-            <li>Press Enter.</li>
-          </ol>
-        </div>
-      </section>
-
-      <section className="space-y-6">
-        <div className="flex items-center gap-3 text-primary border-b border-border pb-2">
-          <Terminal size={24} strokeWidth={1.5} />
-          <h2 className="text-2xl font-bold m-0 border-0 p-0">3.3 Installation Process</h2>
-        </div>
-        <div className="bg-bg-primary border border-border p-6 rounded space-y-4">
-          <h3 className="text-lg font-bold text-primary mt-0">Initial Config</h3>
-          <ul className="list-disc list-inside space-y-2 text-primary/80 text-sm">
-            <li>Select <strong>Graphical Install</strong>.</li>
-            <li>Select Language, Country, and Keyboard.</li>
-            <li><strong>Network:</strong> Select wireless interface (e.g., Connect2Smith).</li>
-            <li>Select WEP/Open Network. Press Enter for key if prompted.</li>
-          </ul>
-          <Note type="warning" title="Network Error">
-            If "Network autoconfiguration failed" appears, press Enter.
-            Select "Do not configure the network at this time".
-          </Note>
+        <h2 className="text-2xl font-bold text-primary border-b border-border pb-2">3.1 Linux Distributions Overview</h2>
+        
+        <div className="grid md:grid-cols-2 gap-8">
+            <div className="space-y-4">
+                <h3 className="font-bold text-lg">Debian-based (The .deb Family)</h3>
+                <p className="text-sm text-primary/80">
+                    Includes <strong>Ubuntu</strong> and <strong>Debian</strong>. Known for massive package repositories (`apt`) and huge community support. Great for beginners and AI/ML workloads.
+                </p>
+            </div>
+             <div className="space-y-4">
+                <h3 className="font-bold text-lg">RPM-based (The Enterprise Family)</h3>
+                <p className="text-sm text-primary/80">
+                    Includes <strong>RHEL</strong>, <strong>Rocky Linux</strong>, <strong>AlmaLinux</strong>, and <strong>Fedora</strong>. Standard in HPC centers and corporate environments. Uses `dnf`/`yum`.
+                </p>
+            </div>
         </div>
 
-        <div className="bg-bg-primary border border-border p-6 rounded space-y-4">
-          <h3 className="text-lg font-bold text-primary mt-0">User Setup</h3>
-          <ul className="list-disc list-inside space-y-2 text-primary/80 text-sm">
-            <li>Enter Hostname. Press Enter.</li>
-            <li>Enter Root Password. Press Enter.</li>
-            <li>Enter Username (e.g., <code>mpr</code>). Press Enter.</li>
-            <li>Enter User Password. Press Enter.</li>
-            <li>Select Time Zone (e.g., Eastern).</li>
-          </ul>
+        <div className="bg-bg-secondary/20 p-6 rounded border border-border mt-6">
+            <h3 className="font-bold flex items-center gap-2 mb-2"><Shield size={20}/> Enterprise vs. Community</h3>
+            <p className="text-primary/80 mb-4">
+                <strong>RHEL (Red Hat Enterprise Linux)</strong> requires a subscription (free for developers). 
+                <strong>Rocky</strong> and <strong>Alma</strong> are binary-compatible free clones. 
+                <strong>Fedora</strong> is the upstream bleeding edge.
+            </p>
+            <p className="text-sm italic">
+                Recommendation: Use <strong>Rocky Linux</strong> or <strong>Ubuntu LTS</strong> for stability.
+            </p>
         </div>
 
-        <div className="bg-bg-primary border border-border p-6 rounded space-y-4">
-          <h3 className="text-lg font-bold text-primary mt-0">Partitioning</h3>
-          <ul className="list-disc list-inside space-y-2 text-primary/80 text-sm">
-            <li>Select <strong>Guided - use entire disk</strong>.</li>
-            <li>Select the target drive (e.g., TOSHIBA 256 GB).</li>
-            <li>Select <strong>All files in one partition</strong>.</li>
-            <li>Select <strong>Finish partitioning and write changes to disks</strong>.</li>
-            <li>Select <strong>Yes</strong> to write changes.</li>
-          </ul>
-        </div>
-
-        <div className="bg-bg-primary border border-border p-6 rounded space-y-4">
-          <h3 className="text-lg font-bold text-primary mt-0">Finalizing</h3>
-          <ul className="list-disc list-inside space-y-2 text-primary/80 text-sm">
-            <li><strong>Mirror:</strong> Select No/Yes to continue without a network mirror.</li>
-            <li><strong>Popularity Contest:</strong> Select No.</li>
-            <li><strong>Software Selection:</strong> Keep standard system utilities checked. Press Tab. Press Enter.</li>
-            <li>Wait for installation to complete.</li>
-            <li>Press Enter to reboot.</li>
-          </ul>
-        </div>
-
-        <Note type="success" title="Installation Complete">
-          Log in with your new username.
-          Verify your IP address: <code>ip -c address</code>
+        <Note type="info" title="Single System Image (SSI)">
+            The goal is consistency. Every node should look and behave exactly the same. 
+            If you run `python --version` on Node 1, it should match Node 100.
         </Note>
       </section>
+
+      <section className="space-y-6">
+        <h2 className="text-2xl font-bold text-primary border-b border-border pb-2">3.2 Installation & Base Config</h2>
+        <p className="text-primary/80">
+            For this guide, we will assume a Debian-based system (like Ubuntu Server), but the concepts apply everywhere.
+        </p>
+        
+        <div className="space-y-4">
+            <h3 className="font-bold">The Process</h3>
+            <ol className="list-decimal list-inside space-y-2 text-primary/80 ml-4">
+                <li><strong>Head Node:</strong> Manual installation via USB/ISO.</li>
+                <li><strong>Compute Nodes:</strong> Automated installation via PXE (Network Boot).</li>
+                <li><strong>Post-Install:</strong> Configuration management (Ansible).</li>
+            </ol>
+        </div>
+
+        <div className="p-4 border border-border rounded bg-bg-primary mt-4">
+             <h4 className="font-bold flex items-center gap-2 mb-2"><CheckCircle size={16}/> Document Everything</h4>
+             <p className="text-sm text-primary/80">
+                Never just run a command and forget it. Write it down. Better yet, write an Ansible playbook.
+             </p>
+        </div>
+      </section>
+
+      <div className="flex justify-between mt-12 pt-8 border-t border-border">
+         <Link to="/hardware/design" className="text-primary/60 hover:text-primary">
+            ← Previous: Hardware
+         </Link>
+         <Link to="/software-setup/network" className="font-bold hover:underline decoration-primary/30 underline-offset-4">
+            Next: Network Configuration →
+         </Link>
+      </div>
     </div>
   );
 };

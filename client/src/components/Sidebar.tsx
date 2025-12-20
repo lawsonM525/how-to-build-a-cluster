@@ -36,9 +36,9 @@ const Sidebar = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (v: boolea
         initial={{ x: '-100%' }}
         animate={{ x: isOpen ? 0 : '-100%' }}
         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-        className="fixed top-0 left-0 z-50 h-screen w-80 bg-bg-primary border-r border-border flex flex-col shadow-2xl transition-colors duration-200"
+        className="fixed top-0 left-0 z-50 h-screen w-80 bg-bg-primary flex flex-col shadow-2xl transition-colors duration-200"
       >
-        <div className="p-6 border-b border-border flex justify-between items-center">
+        <div className="p-6 flex justify-between items-center">
           <h1 className="text-xl font-bold text-primary tracking-wider">CLUSTER GUIDE</h1>
           <button onClick={() => setIsOpen(false)} className="text-primary/60 hover:text-primary transition-colors">
             <X size={24} />
@@ -76,7 +76,7 @@ const Sidebar = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (v: boolea
                           exit={{ height: 0, opacity: 0 }}
                           className="overflow-hidden"
                         >
-                          <div className="pl-10 pr-2 py-1 space-y-1 border-l border-border ml-5">
+                          <div className="pl-10 pr-2 py-1 space-y-1 ml-5">
                              <NavLink
                                 to={item.path}
                                 end
@@ -127,7 +127,7 @@ const Sidebar = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (v: boolea
           })}
         </nav>
 
-        <div className="p-4 border-t border-border text-xs text-primary/40 text-center">
+        <div className="p-4 text-xs text-primary/40 text-center">
           <p>v1.0.0 • By The Robots</p>
         </div>
       </motion.aside>

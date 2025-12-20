@@ -4,23 +4,38 @@
 
 @layer base {
   :root {
+    /* Palette Definition (RGB values for variable usage) */
+    --base01: 0 0 0;          /* Black */
+    --base02: 0 56 67;        /* Deep Teal */
+    --base03: 0 106 124;      /* Teal */
+    --base04: 8 149 171;      /* Teal */
+    --base05: 45 186 207;     /* Cyan */
+    --base06: 98 215 233;     /* Light Cyan */
+    --base07: 168 239 249;    /* Pale Cyan */
+    --base08: 255 255 255;    /* White */
+
     /* Light Mode (Default) */
-    --bg-primary: 255 255 255;
-    --bg-secondary: 245 245 245; /* gray-100 */
-    --text-primary: 0 0 0;
-    --text-secondary: 60 60 60;
-    --border-primary: 220 220 220; /* gray-200 */
-    --accent: 0 0 0;
+    --bg-primary: var(--base08);
+    --bg-secondary: var(--base07);
+    --text-primary: var(--base01);
+    --text-secondary: var(--base02);
+    --border-primary: var(--base06);
+    --accent: var(--base02);
   }
 
   .dark {
     /* Dark Mode */
-    --bg-primary: 0 0 0;
-    --bg-secondary: 20 20 20;
-    --text-primary: 255 255 255;
-    --text-secondary: 200 200 200;
-    --border-primary: 50 50 50;
-    --accent: 255 255 255;
+    --bg-primary: var(--base01);
+    --bg-secondary: var(--base02);
+    --text-primary: var(--base08);
+    --text-secondary: var(--base06);
+    --border-primary: var(--base03);
+    --accent: var(--base06);
+  }
+
+  ::selection {
+    background-color: var(--base05);
+    color: var(--base01);
   }
 }
 
@@ -33,7 +48,7 @@ code {
 }
 
 pre {
-  @apply bg-primary border border-border p-4 rounded-lg overflow-x-auto;
+  @apply bg-primary p-4 rounded-lg overflow-x-auto;
 }
 
 pre code {
@@ -53,7 +68,7 @@ h1 {
 }
 
 h2 {
-  @apply text-2xl mb-6 mt-12 border-b border-border pb-2;
+  @apply text-2xl mb-6 mt-12 pb-2;
 }
 
 h3 {
@@ -73,7 +88,7 @@ li {
 }
 
 blockquote {
-  @apply border-l-2 border-border pl-4 italic text-primary/60 my-6;
+  @apply bg-bg-secondary/20 p-4 rounded italic text-primary/80 my-6;
 }
 
 /* Custom Scrollbar */
@@ -92,4 +107,94 @@ blockquote {
 
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-primary/40;
+}
+
+/* PrismJS Syntax Highlighting Theme */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #a8eff9; /* base07 */
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.875rem;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.625;
+  tab-size: 4;
+  hyphens: none;
+}
+
+/* Token Colors */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #0895ab; /* base04 */
+  font-style: italic;
+}
+
+.token.punctuation {
+  color: #a8eff9; /* base07 */
+}
+
+.token.namespace {
+  opacity: 0.7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #ffa190; /* base09 */
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #9be16e; /* base0B */
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #62d7e9; /* base06 */
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: #a2bdff; /* base0E */
+}
+
+.token.function,
+.token.class-name {
+  color: #dcc264; /* base0A */
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: #e49dff; /* base0F */
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
 }

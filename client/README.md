@@ -1,84 +1,67 @@
-# Cluster Guide Client
+# Website Content Guide
 
-An interactive guide and boilerplate for building compute clusters, built with React, TypeScript, and Tailwind CSS.
+This guide helps you (Hi, Michael) or any other contributor locate and update the content for the How to Build a Cluster Guide.
 
-## Features
+## 📂 Content Map
 
-- **Interactive Guide Structure**: Organized into 7 Parts:
-  1. Conceptual Foundations
-  2. Hardware Engineering
-  3. Software Foundation
-  4. Infrastructure Services
-  5. The Workload Manager
-  6. Parallel Programming
-  7. Validation & Security
-- **Minimalist Design**:
-  - **Dark Mode**: High contrast, white text on black background (The Robots theme).
-  - **Light Mode**: Accessible black text on white background.
-  - **Theme Toggle**: Switch between modes via the bottom navigation bar.
-- **Reader Mode Layout**: Centered content with minimized distractions.
-- **Reusable Components**:
-  - `Terminal`: Styled terminal window for command outputs (Themed).
-  - `CodeBlock`: Syntax highlighting-ready code blocks with copy functionality (Themed).
-  - `Note`: Callout boxes for info, warnings, and success messages (Themed).
-  - `Sidebar`: Slide-over navigation for all screen sizes.
-  - `BottomNav`: Persistent navigation controls and theme toggle.
-- **Tech Stack**:
-  - React 19
-  - TypeScript
-  - Vite
-  - Tailwind CSS v3
-  - Framer Motion
-  - Lucide React
-  - React Router v7
+The website content is located in `src/pages/`. Below is the mapping between the website sections and their source files.
 
-## Getting Started
+### 🏠 Core
+| Page | File Path |
+|------|-----------|
+| **Home** | `src/pages/Home.tsx` |
+| **404 Not Found** | `src/pages/NotFound.tsx` |
 
-### Prerequisites
+### 📚 Part I: Foundations
+| Chapter | File Path |
+|---------|-----------|
+| **Ch 1: Intro to Clusters** | `src/pages/foundations/Intro.tsx` |
 
-- Node.js (v18 or higher recommended)
-- npm
+### 🖥️ Part II: Hardware
+| Chapter | File Path |
+|---------|-----------|
+| **Ch 2: Designing the Frame** | `src/pages/hardware/Design.tsx` |
 
-### Installation
+### ⚙️ Part III: Software Setup
+| Chapter | File Path |
+|---------|-----------|
+| **Ch 3: OS Selection** | `src/pages/software/OSSelection.tsx` |
+| **Ch 4: Network Config** | `src/pages/software/NetworkConfig.tsx` |
 
-1. Navigate to the client directory:
-   ```bash
-   cd client
-   ```
+### 🏗️ Part IV: Infrastructure
+| Chapter | File Path |
+|---------|-----------|
+| **Ch 5: Shared Storage** | `src/pages/infrastructure/Storage.tsx` |
+| **Ch 6: User Management** | `src/pages/infrastructure/Users.tsx` |
+| **Ch 7: Cluster Management** | `src/pages/management/AnsibleSetup.tsx` |
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+### ⏱️ Part V: Workload Manager
+| Chapter | File Path |
+|---------|-----------|
+| **Ch 8: Job Schedulers** | `src/pages/scheduler/Slurm.tsx` |
 
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
+### 📦 Part VI: Comm & Apps
+| Chapter | File Path |
+|---------|-----------|
+| **Ch 9: Parallel Frameworks** | `src/pages/apps/MPI.tsx` |
+| **Ch 10: Optimization** | `src/pages/apps/Optimization.tsx` |
 
-4. Build for production:
-   ```bash
-   npm run build
-   ```
+### 🛡️ Part VII: Perf & Sec
+| Chapter | File Path |
+|---------|-----------|
+| **Ch 11: Benchmarking** | `src/pages/perf-sec/Benchmarking.tsx` |
+| **Ch 12: Security** | `src/pages/perf-sec/Security.tsx` |
 
-## Project Structure
+### 📖 Appendix
+| Chapter | File Path |
+|---------|-----------|
+| **Resources & Glossary** | `src/pages/appendix/Resources.tsx` |
 
-```
-client/
-├── src/
-│   ├── components/    # Reusable UI components (CodeBlock, Terminal, etc.)
-│   ├── data/          # Static data (navigation structure)
-│   ├── layouts/       # Page layouts (MainLayout)
-│   ├── pages/         # Route components
-│   ├── App.tsx        # Routing configuration
-│   ├── index.css      # Global styles and Tailwind directives
-│   └── main.tsx       # Entry point
-├── tailwind.config.js # Theme configuration
-└── vite.config.ts     # Vite configuration
-```
+---
 
-## Customization
+## 🛠️ How to Update Content
 
-- **Navigation**: Update `src/data/navigation.ts` to add or modify chapters.
-- **Theme**: Edit `tailwind.config.js` to change the color palette.
-- **Content**: Add new pages in `src/pages/` and register them in `src/App.tsx`.
+1.  **Locate the File**: Use the table above to find the React component file for the page you want to edit.
+2.  **Edit Content**: The content is written in JSX. You can write standard HTML-like tags (`<p>`, `<h2>`, `<ul>`) and use the custom components provided.
+3.  **Navigation**: If you need to add new pages or change the sidebar order, edit `src/data/navigation.ts`.
+4.  **Routing**: If you add a new page, make sure to register it in `src/App.tsx`.
