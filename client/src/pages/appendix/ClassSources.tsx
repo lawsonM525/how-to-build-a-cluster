@@ -29,12 +29,7 @@ const ClassSources = () => {
             title: "Slim Fly: A Cost Effective Low-Diameter Network Topology", 
             desc: "Besta & Hoefler (SC '14) - Proposal for a high-performance network topology that approaches theoretically optimal diameter, offering advantages in latency and cost.",
             filename: "sf_sc_2014 (3).pdf" 
-        },
-        {
-            title: "Debian Wiki (CSC 352 Copy)",
-            desc: "Class-specific mirror of Debian installation guides, networking setup, and troubleshooting steps used during the cluster build.",
-            filename: "csc352-wiki.txt"
-        },
+        }, 
         {
             title: "An Even Easier Introduction to CUDA",
             desc: "NVIDIA Technical Blog - A hands-on introduction to writing CUDA C++ code, covering memory allocation, kernel launches, and thread hierarchy.",
