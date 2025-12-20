@@ -19,8 +19,8 @@ const Slurm = () => {
         <h2 className="text-2xl font-bold text-primary border-b border-border pb-2">8.1 The Role of the Scheduler</h2>
         <ul className="list-disc list-inside space-y-2 text-primary/80">
             <li><strong>Arbitrate Resources:</strong> "I need 40 cores and 200GB RAM."</li>
-            <li><strong>Queue Jobs:</strong> "Wait your turn, Alice is running a simulation."</li>
-            <li><strong>Enforce Fair Share:</strong> "Bob has used 90% of the cluster this week, lower his priority."</li>
+            <li><strong>Queue Jobs:</strong> "Wait your turn, Mary-Alice is running a simulation."</li>
+            <li><strong>Enforce Fair Share:</strong> "Michael has used 90% of the cluster this week, lower his priority."</li>
         </ul>
 
         <div className="grid md:grid-cols-3 gap-4 mt-6">
@@ -134,6 +134,21 @@ JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)<br/>
               <h4 className="font-bold text-sm">Workflow Scheduler</h4>
               <p className="text-xs text-primary/70 mt-1">Orders multi-step pipelines and triggers work, but usually delegates compute placement to a cluster scheduler.</p>
             </div>
+          </div>
+
+          <div className="mt-6 pt-4 border-t border-border/50">
+            <h4 className="font-bold text-sm mb-2">Wait, what do those terms mean?</h4>
+            <ul className="space-y-2 text-sm text-primary/80 list-disc ml-4">
+              <li>
+                <strong className="text-primary">Lifecycle Management:</strong> Keeping the app alive. If it crashes, restart it. If it needs to stop, shut it down gracefully.
+              </li>
+              <li>
+                <strong className="text-primary">Service Discovery:</strong> An automated phonebook. Apps find each other by name (e.g., "database") instead of memorizing changing IP addresses.
+              </li>
+              <li>
+                <strong className="text-primary">Rollouts:</strong> Updating software without downtime. The system slowly replaces old versions with new ones so users don't notice.
+              </li>
+            </ul>
           </div>
         </div>
         
